@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controller.GestionTypeView"
+            prefHeight="696.0" prefWidth="998.0">
+    <children>
+        <TextField fx:id="tfnom" layoutX="107.0" layoutY="61.0" prefHeight="25.0" prefWidth="200.0" promptText="Nom" />
+        <TextArea fx:id="tadesc" layoutX="107.0" layoutY="154.0" prefHeight="200.0" prefWidth="200.0" promptText="Description" />
+        <ListView fx:id="listview" layoutX="440.0" layoutY="61.0" prefHeight="353.0" prefWidth="466.0" />
+        <Button layoutX="187.0" layoutY="530.0" mnemonicParsing="false" onAction="#ajouterType" text="Ajouter" />
+        <Button layoutX="372.0" layoutY="530.0" mnemonicParsing="false" onAction="#modifierType" text="Modifier" />
+        <Button layoutX="574.0" layoutY="530.0" mnemonicParsing="false" onAction="#supprimerType" text="Supprimer" />
+    </children>
+</AnchorPane>

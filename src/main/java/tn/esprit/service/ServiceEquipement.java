@@ -1,7 +1,7 @@
-package service;
+package tn.esprit.service;
 
-import entities.Equipement;
-import utils.MyDataBase;
+import tn.esprit.entities.Equipement;
+import tn.esprit.utils.MyDataBase;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

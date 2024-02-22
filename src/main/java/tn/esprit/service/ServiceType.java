@@ -1,7 +1,7 @@
-package service;
+package tn.esprit.service;
 
-import entities.Type;
-import utils.MyDataBase;
+import tn.esprit.entities.Type;
+import tn.esprit.utils.MyDataBase;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -69,5 +69,22 @@ public class ServiceType implements IService<Type> {
             System.out.println("erreur: " + e.getMessage());
         }
         return lt;
+    }
+    public List<String> getAllTypeName(){
+        List<String> lnom=new ArrayList<>();
+        for(Type type:afficher()){
+            lnom.add(type.getNom());
+        }
+        return lnom;
+        //return afficher().stream().map(t->t.getNom()).collect(Collectors.toList());
+    }
+    public int getIdtypeByNom(String nom){
+        for(Type type:afficher()){
+            if(type.getNom().equals(nom)){
+                return type.getId();
+            }
+        }
+        return 0;
+        //return afficher().stream().filter(t->t.getNom().equals(nom)).findAny().orElse(null).getId();
     }
 }

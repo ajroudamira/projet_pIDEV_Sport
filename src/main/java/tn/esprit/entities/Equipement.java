@@ -1,4 +1,4 @@
-package entities;
+package tn.esprit.entities;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package entities;
+package tn.esprit.entities;
 public class Type {
     private int id;
     private String nom;
