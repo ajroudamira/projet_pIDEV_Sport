@@ -8,13 +8,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import services.ServiceCours;
 
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.Optional;
 
 public class AffichageCoursController {
     public TextField tf_newnom;
+    public ImageView rech;
+    public TextField tf_recherche;
     ServiceCours serviceCours = new ServiceCours() ;
 
 
@@ -136,6 +141,49 @@ public class AffichageCoursController {
             selectCoursAlert.showAndWait();
         }
     }
+
+    public void RefreshCours(ActionEvent actionEvent) {
+        try {
+            // Rafraîchir les données de votre TableView
+            ObservableList<Cours> courss = FXCollections.observableList(serviceCours.afficher());
+            tv_cours.setItems(courss);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
+
+    public void trier(MouseEvent mouseEvent) {
+        ObservableList<Cours> data = tv_cours.getItems();
+
+        // Trier les données par l'ordre alphabétique des cours
+        data.sort(Comparator.comparing(Cours::getNom));
+
+        // Mettre à jour les données dans la TableView
+        tv_cours.setItems(data);
+    }
+
+    public void RechercherCours(MouseEvent mouseEvent) {
+        String searchQuery = tf_recherche.getText().trim().toLowerCase();
+
+        // Vérifiez si le champ de recherche n'est pas vide
+        if (!searchQuery.isEmpty()) {
+            // Filtrer les cours selon le nom de recherche
+            ObservableList<Cours> filteredCours = FXCollections.observableArrayList();
+
+            for (Cours cours : tv_cours.getItems()) {
+                if (cours.getNom().toLowerCase().contains(searchQuery)) {
+                    filteredCours.add(cours);
+                }
+            }
+
+            // Mettre à jour les données affichées dans le TableView avec les résultats de la recherche
+            tv_cours.setItems(filteredCours);
+        } else {
+            // Si le champ de recherche est vide, réafficher tous les cours
+            tv_cours.setItems(data);
+        }
+    }
+}
+
 
 

@@ -14,10 +14,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import services.ServiceCours;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
+
 public class CoursController {
 
-    ServiceCours serviceCours = new ServiceCours() ;
-
+    ServiceCours serviceCours = new ServiceCours();
 
     @FXML
     private TextField tf_duree;
@@ -30,7 +32,6 @@ public class CoursController {
 
     @FXML
     private TextField tf_salle;
-
 
     @FXML
     void AfficherCours(ActionEvent event) {
@@ -45,31 +46,59 @@ public class CoursController {
     @FXML
     void AjouterCours(ActionEvent event) {
         try {
-            serviceCours.ajouter(new Cours(Integer.parseInt(tf_duree.getText()), tf_horaire.getText(), /*tf_id_type.getText(),*/ tf_nom.getText(), tf_salle.getText()));
+            // Vérifier si la durée contient uniquement des chiffres
+            if (!isNumeric(tf_duree.getText())) {
+                showAlert("Erreur", "La durée doit contenir uniquement des chiffres !");
+                return;
+            }
 
+            // Vérifier si le nom contient uniquement des lettres
+            if (!isAlpha(tf_nom.getText())) {
+                showAlert("Erreur", "Le nom ne peut contenir que des lettres !");
+                return;
+            }
 
+          /*  // Vérifier si la salle contient uniquement des lettres
+            if (!isAlpha(tf_salle.getText())) {
+                showAlert("Erreur", "La salle ne peut contenir que dessss lettres !");
+                return;
+            }*/
+
+            // Vérifier l'unicité du nom
+            if (serviceCours.isNomExist(tf_nom.getText())) {
+                showAlert("Erreur", "Un cours avec ce nom existe déjà !");
+                return;
+            }
+
+            // Ajouter le cours si toutes les validations sont passées
+            serviceCours.ajouter(new Cours(Integer.parseInt(tf_duree.getText()), tf_horaire.getText(), tf_nom.getText(), tf_salle.getText()));
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("success");
-            alert.setContentText("cours ajoute");
+            alert.setTitle("Success");
+            alert.setContentText("Cours ajouté avec succès !");
             alert.showAndWait();
-
-        } catch(SQLException e){
-            System.out.println(e.getMessage());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Gérer les erreurs SQL
         }
     }
 
-  /*  @FXML
-    void ModifierCours(ActionEvent event) {
-
+    // Méthode pour afficher une alerte
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
-   @FXML
-    void SupprimerCours(ActionEvent event) {
+    // Méthode pour vérifier si une chaîne contient uniquement des chiffres
+    private boolean isNumeric(String str) {
+        return str.matches("\\d+");
+    }
 
-    } */
-
-
-
-
+    // Méthode pour vérifier si une chaîne contient uniquement des lettres
+    private boolean isAlpha(String str) {
+        return str.matches("[a-zA-Z]+");
+    }
 }

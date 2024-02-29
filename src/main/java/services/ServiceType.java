@@ -107,6 +107,20 @@ public class ServiceType implements  IService<TypeCours>{
         return false;
 
     }
+    public boolean isNomExist(String nom) throws SQLException {
+        // Écrire votre requête SQL pour vérifier si le nom existe déjà dans votre base de données
+        String query = "SELECT COUNT(*) FROM type_cours WHERE nom = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, nom);
+        ResultSet resultSet = statement.executeQuery();
 
+        // Récupérer le résultat de la requête
+        if (resultSet.next()) {
+            int count = resultSet.getInt(1);
+            return count > 0; // Si le count est supérieur à 0, le nom existe déjà
+        }
+
+        return false; // Si le résultat est vide, le nom n'existe pas
+    }
 }
 

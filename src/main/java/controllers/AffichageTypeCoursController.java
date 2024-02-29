@@ -1,8 +1,8 @@
 package controllers;
 
-import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.io.IOException;
@@ -11,18 +11,23 @@ import entities.Cours;
 import entities.TypeCours;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import services.ServiceType;
 import javafx.scene.control.TableColumn.CellEditEvent;
 
 
 public class AffichageTypeCoursController {
     public TextField tf_newcalories;
+    public TextField tf_recherche;
+    public ImageView rech;
     ServiceType serviceType= new ServiceType();
 
 
@@ -47,7 +52,28 @@ public class AffichageTypeCoursController {
     public int getCalories() {
         return Integer.parseInt(col_calories.getText());
     }
+   /* @FXML
+    void search(ActionEvent event) {
+        String searchQuery = tf_recherche.getText().trim().toLowerCase();
 
+        // Vérifiez si le champ de recherche n'est pas vide
+        if (!searchQuery.isEmpty()) {
+            // Filtrer les cours selon le nom de recherche
+            ObservableList<TypeCours> filteredType = FXCollections.observableArrayList();
+
+            for (TypeCours typeCours : tv_type.getItems()) {
+                if (typeCours.getNom().toLowerCase().contains(searchQuery)) {
+                    filteredType.add(typeCours);
+                }
+            }
+
+            // Mettre à jour les données affichées dans le TableView avec les résultats de la recherche
+            tv_type.setItems(filteredType);
+        } else {
+            // Si le champ de recherche est vide, réafficher tous les cours
+            tv_type.setItems(data);
+        }
+    } */
     @FXML
     void initialize() {
 
@@ -160,7 +186,7 @@ public class AffichageTypeCoursController {
                 serviceType.modifier(newCalories, t.getId());
 
                 // Rafraîchir le TableView
-                tv_type.refresh();
+                tv_type.refresh(); // Actualiser le TableView
 
                 Alert BookAlert = new Alert(Alert.AlertType.INFORMATION);
                 BookAlert.setTitle("edit");
@@ -213,4 +239,76 @@ public class AffichageTypeCoursController {
         typeSelected.setCalories(Integer.parseInt(edittedCell.getNewValue().toString()));
     }
 
-}
+
+    public void RefreshType(ActionEvent actionEvent) {
+        try {
+            // Rafraîchir les données de votre TableView
+            ObservableList<TypeCours> types = FXCollections.observableList(serviceType.afficher());
+            tv_type.setItems(types);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void trier(MouseEvent mouseEvent) {
+        ObservableList<TypeCours> data = tv_type.getItems();
+
+        // Trier les données par l'ordre alphabétique des cours
+        data.sort(Comparator.comparing(TypeCours::getNom));
+
+        // Mettre à jour les données dans la TableView
+        tv_type.setItems(data);
+    }
+
+    public void RechercherType(MouseEvent mouseEvent) {
+        String searchQuery = tf_recherche.getText().trim().toLowerCase();
+
+        // Vérifiez si le champ de recherche n'est pas vide
+        if (!searchQuery.isEmpty()) {
+            // Filtrer les cours selon le nom de recherche
+            ObservableList<TypeCours> filteredType = FXCollections.observableArrayList();
+
+            for (TypeCours typeCours : tv_type.getItems()) {
+                if (typeCours.getNom().toLowerCase().contains(searchQuery)) {
+                    filteredType.add(typeCours);
+                }
+            }
+
+            // Mettre à jour les données affichées dans le TableView avec les résultats de la recherche
+            tv_type.setItems(filteredType);
+        } else {
+            // Si le champ de recherche est vide, réafficher tous les cours
+            tv_type.setItems(data);
+        }
+    }
+
+   /* public void RechercherType(MouseEvent mouseEvent) {
+        String recherche = tf_recherche.getText().trim();
+        if (!recherche.isEmpty()) {
+            try {
+                List<Cours> coursRecherches = serviceCours.rechercherParNom(recherche);
+                if (!coursRecherches.isEmpty()) {
+                    ObservableList<Cours> listeCours = FXCollections.observableArrayList(coursRecherches);
+                    tv_cours.setItems(listeCours);
+                } else {
+                    afficherAlerte(Alert.AlertType.INFORMATION, "Aucun résultat", "Aucun cours trouvé pour cette recherche.");
+                }
+            } catch (SQLException e) {
+                afficherAlerte(Alert.AlertType.ERROR, "Erreur", "Une erreur s'est produite lors de la recherche.");
+            }
+        } else {
+            afficherAlerte(Alert.AlertType.WARNING, "Champ vide", "Veuillez entrer un nom de cours pour la recherche.");
+        }
+    }
+
+    // Méthode utilitaire pour afficher une alerte
+    private void afficherAlerte(Alert.AlertType type, String titre, String contenu) {
+        Alert alert = new Alert(type);
+        alert.setTitle(titre);
+        alert.setHeaderText(null);
+        alert.setContentText(contenu);
+        alert.showAndWait();
+    } */
+    }
+
+

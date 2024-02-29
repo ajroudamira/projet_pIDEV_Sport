@@ -7,10 +7,16 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class ServiceCours implements  IService<Cours> {
+
+
     Connection connection;
-    public ServiceCours(){
-        connection= MyDatabase.getInstance().getConnection();
+
+    public ServiceCours() {
+        connection = MyDatabase.getInstance().getConnection();
+
 
     }
     /* @Override
@@ -89,7 +95,7 @@ public class ServiceCours implements  IService<Cours> {
         ps.setString(2, cours.getSalle());
         ps.setInt(3, cours.getDuree());
         ps.setString(4, cours.getHoraire());
-       // ps.setInt(5, cours.getId_type());
+        // ps.setInt(5, cours.getId_type());
 
         ps.executeUpdate();
         System.out.println("type ajouté");
@@ -109,24 +115,25 @@ public class ServiceCours implements  IService<Cours> {
     } */
 
 
-        @Override
-        public List<Cours> afficher() throws SQLException {
+    @Override
+    public List<Cours> afficher() throws SQLException {
 
-            List<Cours> courss= new ArrayList<>();
-            String req="select * from cours";
-            Statement st  = connection.createStatement();
-            ResultSet rs = st.executeQuery(req);
-            while (rs.next()){
-                Cours c = new Cours();
-                c.setId(rs.getInt("id"));
-                c.setNom(rs.getString("nom"));
-                c.setSalle(rs.getString("salle"));
-                c.setDuree(rs.getInt("duree"));
-                c.setHoraire(rs.getString("horaire"));
-                courss.add(c);
-            }
-            return courss;
+        List<Cours> courss = new ArrayList<>();
+        String req = "select * from cours";
+        Statement st = connection.createStatement();
+        ResultSet rs = st.executeQuery(req);
+        while (rs.next()) {
+            Cours c = new Cours();
+            c.setId(rs.getInt("id"));
+            c.setNom(rs.getString("nom"));
+            c.setSalle(rs.getString("salle"));
+            c.setDuree(rs.getInt("duree"));
+            c.setHoraire(rs.getString("horaire"));
+            courss.add(c);
         }
+        return courss;
+    }
+
     /*public void supprimer(Cours cours) {
         String requete = "DELETE FROM COURS WHERE ID_COURS = ?";
         try (PreparedStatement ps = connection.prepareStatement(requete)) {
@@ -148,6 +155,7 @@ public class ServiceCours implements  IService<Cours> {
             System.out.println(e.getMessage());
         }
     }
+
     public boolean modifier(String nom, int id) throws SQLException {
         try {
             PreparedStatement pre = connection.prepareStatement("update Cours set nom =? where id=? ;");
@@ -167,4 +175,23 @@ public class ServiceCours implements  IService<Cours> {
 
     }
 
+    public boolean isNomExist(String nom) throws SQLException {
+        // Écrire votre requête SQL pour vérifier si le nom existe déjà dans votre base de données
+        String query = "SELECT COUNT(*) FROM cours WHERE nom = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, nom);
+        ResultSet resultSet = statement.executeQuery();
+
+        // Récupérer le résultat de la requête
+        if (resultSet.next()) {
+            int count = resultSet.getInt(1);
+            return count > 0; // Si le count est supérieur à 0, le nom existe déjà
+        }
+
+        return false; // Si le résultat est vide, le nom n'existe pas
+    }
+
+
 }
+
+

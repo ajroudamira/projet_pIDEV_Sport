@@ -1,6 +1,4 @@
 package tests;
-
-import entities.TypeCours;
 import entities.TypeCours;
 import services.ServiceType;
 import entities.Cours;
