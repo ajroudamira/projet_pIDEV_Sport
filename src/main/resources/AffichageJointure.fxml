@@ -117,7 +117,7 @@
                      <children>
                         <ImageView fitHeight="26.0" fitWidth="35.0" layoutX="-4.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/call.png" />
+                              <Image url="@images/bell.png" />
                            </image>
                         </ImageView>
                      </children>

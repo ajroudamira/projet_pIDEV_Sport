@@ -6,12 +6,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import services.ServiceCours;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.Optional;
@@ -20,6 +23,8 @@ public class AffichageCoursController {
     public TextField tf_newnom;
     public ImageView rech;
     public TextField tf_recherche;
+    public Label tf_type;
+    public Label tf_back;
     ServiceCours serviceCours = new ServiceCours() ;
 
 
@@ -69,11 +74,10 @@ public class AffichageCoursController {
                 Cours c = tv_cours.getSelectionModel().getSelectedItem();
                 serviceCours.supprimer(c.getId());
 
-                // Mise à jour de la liste des données
+                // Mise à jour  liste des données
                 data.clear();
                 data.addAll(serviceCours.afficher());
 
-                // Rafraîchissement du TableView
                 tv_cours.refresh();
 
                 // Alert Delete Blog :
@@ -144,7 +148,6 @@ public class AffichageCoursController {
 
     public void RefreshCours(ActionEvent actionEvent) {
         try {
-            // Rafraîchir les données de votre TableView
             ObservableList<Cours> courss = FXCollections.observableList(serviceCours.afficher());
             tv_cours.setItems(courss);
         } catch (SQLException e) {
@@ -165,9 +168,9 @@ public class AffichageCoursController {
     public void RechercherCours(MouseEvent mouseEvent) {
         String searchQuery = tf_recherche.getText().trim().toLowerCase();
 
-        // Vérifiez si le champ de recherche n'est pas vide
+        // Vérif  champ de recherche n'est pas vide
         if (!searchQuery.isEmpty()) {
-            // Filtrer les cours selon le nom de recherche
+            // Filtrer cours selon  nom
             ObservableList<Cours> filteredCours = FXCollections.observableArrayList();
 
             for (Cours cours : tv_cours.getItems()) {
@@ -176,13 +179,33 @@ public class AffichageCoursController {
                 }
             }
 
-            // Mettre à jour les données affichées dans le TableView avec les résultats de la recherche
             tv_cours.setItems(filteredCours);
         } else {
-            // Si le champ de recherche est vide, réafficher tous les cours
+            // Si champ de recherche  vide réafficher tous les cours
             tv_cours.setItems(data);
         }
     }
+
+    public void AfficheraffType(MouseEvent mouseEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/Type.fxml"));
+            tf_type.getScene().setRoot(root);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+
+    public void AffichBg(MouseEvent mouseEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/bg.fxml"));
+            tf_back.getScene().setRoot(root);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
 
 

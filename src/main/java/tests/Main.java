@@ -33,9 +33,9 @@ public class Main {
         }
 
         ServiceCours serviceCours = new ServiceCours();
-        Cours c4 = new Cours(2,32 ,"aerobic", "oxygym", "15h");
-        Cours c5 = new Cours(3, 2,"strength", "california", "17h");
-        Cours c6 = new Cours(2, 4,"balance", "gym", "18h");
+        Cours c4 = new Cours(2,"ez" ,"aerobic", "14", t1);
+        Cours c5 = new Cours(3, "az","strength", "16", t3);
+        Cours c6 = new Cours(2, "sq","balance", "12", t2);
 
 
         try {

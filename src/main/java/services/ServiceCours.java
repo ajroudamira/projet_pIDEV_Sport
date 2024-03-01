@@ -1,6 +1,7 @@
 package services;
 
 import entities.Cours;
+import entities.TypeCours;
 import utils.MyDatabase;
 
 import java.sql.*;
@@ -9,148 +10,61 @@ import java.util.List;
 
 
 
-public class ServiceCours implements  IService<Cours> {
-
+public class ServiceCours implements IService<Cours> {
 
     Connection connection;
 
     public ServiceCours() {
         connection = MyDatabase.getInstance().getConnection();
-
-
     }
-    /* @Override
-    public void ajouter(Cours cours) throws SQLException {
-        String req ="insert into cours (nom,type,duree,horaire)"+
-                "values('"+cours.getNom()+"','"+cours.getType()+"',"+cours.getHoraire()+"','"+cours.getDuree()+")";
-        Statement st = connection.createStatement();
-        st.executeUpdate(req);
-        System.out.println("cours ajouté");
-    } */
-   /* @Override
-    public void ajouter(Cours cours) throws SQLException {
-        String req = "INSERT INTO cours (nom, type, duree, horaire) " +
-                "VALUES (?, ?, ?, ?)";
-        PreparedStatement ps = connection.prepareStatement(req);
-        ps.setString(1, cours.getNom());
-        ps.setString(2, cours.getType());
-        ps.setInt(3, cours.getDuree());
-        ps.setString(4, cours.getHoraire());
-
-        ps.executeUpdate();
-        System.out.println("Coach ajouté");
-        ps.close(); // N'oubliez pas de fermer la PreparedStatement
-    }
-    @Override
-    public void modifier(Cours cours) throws SQLException {
-        String req="update cours set nom=? , type=? ,duree=?  , horaire=? where id_cours=?";
-        PreparedStatement ps= connection.prepareStatement(req);
-        ps.setString(1, cours.getNom());
-        ps.setString(2, cours.getType());
-        ps.setString(3, cours.getHoraire());
-        ps.setInt(4, cours.getDuree());
-        ps.setInt(5, cours.getId());
-        ps.executeUpdate();
-        System.out.println("Cours modifie");
-
-    }
-   /* @Override
-    public void delete(Cours c) {
-        String requete = "DELETE FROM Cours WHERE ID_COURS = '"+c.getId()+"' ";
-        try {
-            ste = cnx.createStatement();
-            ste.executeUpdate(requete);
-        }
-        catch (SQLException e){
-            throw new RuntimeException(e);
-        }
-    }*/
-
-/*
-        @Override
-        public List<Cours> afficher() throws SQLException {
-
-            List<Cours> courss= new ArrayList<>();
-            String req="select * from cours";
-            Statement st  = connection.createStatement();
-            ResultSet rs = st.executeQuery(req);
-            while (rs.next()){
-                Cours c = new Cours();
-                c.setId(rs.getInt(1));
-                c.setNom(rs.getString("nom"));
-                c.setType(rs.getString("type"));
-                c.setDuree(rs.getInt("duree"));
-                c.setHoraire(rs.getString("horaire"));
-                courss.add(c);
-            }
-            return courss;
-        } */
 
     @Override
     public void ajouter(Cours cours) throws SQLException {
-        String req = "INSERT INTO cours (nom, salle, duree, horaire/*,id_type*/) " +
-                "VALUES (?, ?, ?, ?  /*,?*/)";
-        PreparedStatement ps = connection.prepareStatement(req);
-        ps.setString(1, cours.getNom());
-        ps.setString(2, cours.getSalle());
-        ps.setInt(3, cours.getDuree());
-        ps.setString(4, cours.getHoraire());
-        // ps.setInt(5, cours.getId_type());
+        String req = "INSERT INTO cours (nom, salle, duree, horaire, type_cours_id) " +
+                "VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = connection.prepareStatement(req)) {
+            ps.setString(1, cours.getNom());
+            ps.setString(2, cours.getSalle());
+            ps.setInt(3, cours.getDuree());
+            ps.setString(4, cours.getHoraire());
 
-        ps.executeUpdate();
-        System.out.println("type ajouté");
-        ps.close(); // N'oubliez pas de fermer la PreparedStatement
+            //  lezm lena ndakhl id type bch nzid type iguess
+            ps.setInt(5, cours.getTypeCours().getId());
+
+            ps.executeUpdate();
+            System.out.println("Cours ajouté avec succès !");
+        }
     }
-
-    /*@Override
-    public void delete(Cours c) {
-        String requete = "DELETE FROM Cours WHERE ID_COURS = '"+c.getId()+"' ";
-        try {
-            ste = cnx.createStatement();
-            ste.executeUpdate(requete);
-        }
-        catch (SQLException e){
-            throw new RuntimeException(e);
-        }
-    } */
-
 
     @Override
     public List<Cours> afficher() throws SQLException {
-
         List<Cours> courss = new ArrayList<>();
-        String req = "select * from cours";
+        String req = "SELECT c.*, tc.* FROM cours c INNER JOIN type_cours tc ON c.type_cours_id = tc.id";
         Statement st = connection.createStatement();
         ResultSet rs = st.executeQuery(req);
         while (rs.next()) {
-            Cours c = new Cours();
-            c.setId(rs.getInt("id"));
-            c.setNom(rs.getString("nom"));
-            c.setSalle(rs.getString("salle"));
-            c.setDuree(rs.getInt("duree"));
-            c.setHoraire(rs.getString("horaire"));
+            TypeCours types = new TypeCours(rs.getInt("tc.id"), rs.getString("tc.nom"), rs.getString("tc.objective"), rs.getString("tc.description"), rs.getInt("tc.calories"));
+            Cours c = new Cours(rs.getInt("c.duree"), rs.getString("c.nom"), rs.getString("c.salle"), rs.getString("c.horaire"), types);
             courss.add(c);
         }
         return courss;
     }
 
-    /*public void supprimer(Cours cours) {
-        String requete = "DELETE FROM COURS WHERE ID_COURS = ?";
-        try (PreparedStatement ps = connection.prepareStatement(requete)) {
-            ps.setInt(1, cours.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
     @Override
     public void supprimer(int id) {
-        String req = "DELETE FROM COURS WHERE id=?";
+        String req = "DELETE FROM type_cours WHERE id=?";
         try {
+            //  nfasakh cours marbout b typee
+            String deleteCoursQuery = "DELETE FROM cours WHERE type_cours_id=?";
+            PreparedStatement deleteCoursStatement = connection.prepareStatement(deleteCoursQuery);
+            deleteCoursStatement.setInt(1, id);
+            deleteCoursStatement.executeUpdate();
+
+            // lena chnfasakh type kemel jemla
             PreparedStatement ps = connection.prepareStatement(req);
-            ps.setInt(1, id); // Utilisez le nom passé en paramètre
+            ps.setInt(1, id);
             ps.executeUpdate();
-            System.out.println("Cours deleted!");
+            System.out.println("Type deleted!");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -176,22 +90,48 @@ public class ServiceCours implements  IService<Cours> {
     }
 
     public boolean isNomExist(String nom) throws SQLException {
-        // Écrire votre requête SQL pour vérifier si le nom existe déjà dans votre base de données
+        // req pr verif si nom existe
         String query = "SELECT COUNT(*) FROM cours WHERE nom = ?";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, nom);
         ResultSet resultSet = statement.executeQuery();
 
-        // Récupérer le résultat de la requête
+        // nrecuperi result
         if (resultSet.next()) {
             int count = resultSet.getInt(1);
-            return count > 0; // Si le count est supérieur à 0, le nom existe déjà
+            return count > 0; // ken akber m 0 nom deja mawjoud
         }
 
-        return false; // Si le résultat est vide, le nom n'existe pas
+        return false; // ken vide nom n'existe pas
     }
 
 
+    public void ModifierCours(String newNomText, int id) {
+    }
+    public TypeCours getTypeCoursByNom(String nom) {
+        try {
+            // Utilisez une requête SQL pour récupérer le TypeCours correspondant au nom
+            String query = "SELECT * FROM type_cours WHERE nom = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, nom);
+            ResultSet resultSet = statement.executeQuery();
+
+            // Si un TypeCours correspondant est trouvé, retournez-le
+            if (resultSet.next()) {
+                return new TypeCours(
+                        resultSet.getInt("id"),
+                        resultSet.getString("nom"),
+                        resultSet.getString("objective"),
+                        resultSet.getString("description"),
+                        resultSet.getInt("calories")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // Retourne null si aucun TypeCours correspondant n'est trouvé
+    }
 }
+
 
 

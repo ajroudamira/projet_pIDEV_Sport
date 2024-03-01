@@ -28,7 +28,7 @@ public class ServiceType implements  IService<TypeCours>{
 
        ps.executeUpdate();
        System.out.println("type ajouté");
-       ps.close(); // N'oubliez pas de fermer la PreparedStatement
+       ps.close();
    }
 
 

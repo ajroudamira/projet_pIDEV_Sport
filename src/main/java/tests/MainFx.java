@@ -17,13 +17,13 @@ public class MainFx extends Application {
     @Override
     public void start(Stage primaryStage) {
        //  FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Type.fxml"));
-         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/AffichageJointure.fxml"));
-        // FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Cours.fxml"));
+         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/bg.fxml"));
+      //  FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Cours.fxml"));
         try {
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
-              primaryStage.setTitle("Gestion des types");
+              primaryStage.setTitle("Gestion Planning");
             // primaryStage.setTitle("Gestion des cours");
             primaryStage.show();
         } catch (IOException e) {

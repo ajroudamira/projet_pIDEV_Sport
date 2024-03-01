@@ -28,6 +28,8 @@ public class AffichageTypeCoursController {
     public TextField tf_newcalories;
     public TextField tf_recherche;
     public ImageView rech;
+    public Label tf_cours;
+    public Label tf_back;
     ServiceType serviceType= new ServiceType();
 
 
@@ -242,7 +244,7 @@ public class AffichageTypeCoursController {
 
     public void RefreshType(ActionEvent actionEvent) {
         try {
-            // Rafraîchir les données de votre TableView
+
             ObservableList<TypeCours> types = FXCollections.observableList(serviceType.afficher());
             tv_type.setItems(types);
         } catch (SQLException e) {
@@ -253,19 +255,18 @@ public class AffichageTypeCoursController {
     public void trier(MouseEvent mouseEvent) {
         ObservableList<TypeCours> data = tv_type.getItems();
 
-        // Trier les données par l'ordre alphabétique des cours
+        // Tri ordre alph  cours
         data.sort(Comparator.comparing(TypeCours::getNom));
 
-        // Mettre à jour les données dans la TableView
         tv_type.setItems(data);
     }
 
     public void RechercherType(MouseEvent mouseEvent) {
         String searchQuery = tf_recherche.getText().trim().toLowerCase();
 
-        // Vérifiez si le champ de recherche n'est pas vide
+        // Vérif  champ de recherche n'est pas vide
         if (!searchQuery.isEmpty()) {
-            // Filtrer les cours selon le nom de recherche
+            // Filtrer  cours selon le nom de recherche
             ObservableList<TypeCours> filteredType = FXCollections.observableArrayList();
 
             for (TypeCours typeCours : tv_type.getItems()) {
@@ -279,6 +280,24 @@ public class AffichageTypeCoursController {
         } else {
             // Si le champ de recherche est vide, réafficher tous les cours
             tv_type.setItems(data);
+        }
+    }
+
+    public void AfficheraffCours(MouseEvent mouseEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/Cours.fxml"));
+            tf_cours.getScene().setRoot(root);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void AffichBg(MouseEvent mouseEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/bg.fxml"));
+            tf_back.getScene().setRoot(root);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 

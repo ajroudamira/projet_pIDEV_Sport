@@ -47,17 +47,17 @@ public class TypeController {
                 return;
             }
 
-            // Vérifier l'unicité du nom
+            // Vérifier unicité  nom
             if (serviceType.isNomExist(tf_nom.getText())) {
                 showAlert("Erreur", "Un type avec ce nom existe déjà !");
                 return;
             }
 
-            // Vérifier la validité des calories
+            // Vérif validité  cal
             try {
                 int calories = Integer.parseInt(tf_calories.getText());
                 if (calories < 0 || calories > 700) {
-                    showAlert("Erreur", "Les calories doivent être un nombre entier positif et inférieur ou égal à 700.");
+                    showAlert("Erreur", "Les calories doivent etre un nombre entier positif et inferieur ou egal a 700.");
                     return;
                 }
             } catch (NumberFormatException e) {
@@ -65,7 +65,7 @@ public class TypeController {
                 return;
             }
 
-            // Vérifier que les champs nom, description et objective ne contiennent que des lettres
+            // Vérif que nom, description  objective ne contiennent que des lettres
             if (!tf_nom.getText().matches("^[a-zA-Z]+$") || !tf_objective.getText().matches("^[a-zA-Z]+$") || !tf_description.getText().matches("^[a-zA-Z]+$")) {
                 showAlert("Erreur", "Les champs Nom, Objective et Description ne doivent contenir que des lettres.");
                 return;
@@ -75,8 +75,8 @@ public class TypeController {
             serviceType.ajouter(new TypeCours(tf_nom.getText(), tf_objective.getText(), tf_description.getText(), Integer.parseInt(tf_calories.getText())));
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Succès");
-            alert.setContentText("Type ajouté avec succès !");
+            alert.setTitle("Succes");
+            alert.setContentText("Type ajoute avec succes !");
             alert.showAndWait();
 
         } catch(SQLException e) {

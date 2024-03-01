@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import entities.Cours;
+import entities.TypeCours;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,7 @@ import javafx.scene.control.TextField;
 
 public class CoursController {
 
+  //  public TextField tf_typecours;
     ServiceCours serviceCours = new ServiceCours();
 
     @FXML
@@ -32,7 +34,8 @@ public class CoursController {
 
     @FXML
     private TextField tf_salle;
-
+    @FXML
+    private TextField tf_typecours;
     @FXML
     void AfficherCours(ActionEvent event) {
         try {
@@ -46,40 +49,46 @@ public class CoursController {
     @FXML
     void AjouterCours(ActionEvent event) {
         try {
-            // Vérifier si la durée contient uniquement des chiffres
             if (!isNumeric(tf_duree.getText())) {
-                showAlert("Erreur", "La durée doit contenir uniquement des chiffres !");
+                showAlert("Erreur", "La duree doit contenir uniquement des chiffres !");
                 return;
             }
 
-            // Vérifier si le nom contient uniquement des lettres
             if (!isAlpha(tf_nom.getText())) {
                 showAlert("Erreur", "Le nom ne peut contenir que des lettres !");
                 return;
             }
 
-          /*  // Vérifier si la salle contient uniquement des lettres
-            if (!isAlpha(tf_salle.getText())) {
-                showAlert("Erreur", "La salle ne peut contenir que dessss lettres !");
-                return;
-            }*/
-
-            // Vérifier l'unicité du nom
             if (serviceCours.isNomExist(tf_nom.getText())) {
-                showAlert("Erreur", "Un cours avec ce nom existe déjà !");
+                showAlert("Erreur", "Un cours avec ce nom existe deja !");
                 return;
             }
 
-            // Ajouter le cours si toutes les validations sont passées
-            serviceCours.ajouter(new Cours(Integer.parseInt(tf_duree.getText()), tf_horaire.getText(), tf_nom.getText(), tf_salle.getText()));
+            // Chercher  TypeCours par son nom
+            TypeCours types = serviceCours.getTypeCoursByNom(tf_typecours.getText());
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setContentText("Cours ajouté avec succès !");
-            alert.showAndWait();
+            if (types != null) {
+                // Creer un nouvel objet Cours en utilisant l'objet TypeCours obtenu
+                Cours nouveauCours = new Cours(
+                        Integer.parseInt(tf_duree.getText()),
+                        tf_nom.getText(),
+                        tf_salle.getText(),
+                        tf_horaire.getText(),
+                        types
+                );
+
+                // najouti cours jdid b service
+                serviceCours.ajouter(nouveauCours);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setContentText("Cours ajoute avec succes !");
+                alert.showAndWait();
+            } else {
+                System.out.println("Le type de cours specifie est introuvable.");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Gérer les erreurs SQL
         }
     }
 
