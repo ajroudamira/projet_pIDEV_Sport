@@ -74,7 +74,7 @@ public class AffichageCoursController {
                 Cours c = tv_cours.getSelectionModel().getSelectedItem();
                 serviceCours.supprimer(c.getId());
 
-                // Mise à jour  liste des données
+                // Mise ajour  liste des données
                 data.clear();
                 data.addAll(serviceCours.afficher());
 
@@ -124,7 +124,7 @@ public class AffichageCoursController {
                 // Mettre à jour le nom du cours seulement si le champ n'est pas vide
                 serviceCours.modifier(newNomText, c.getId());
                 c.setNom(newNomText); // Mettre à jour la valeur dans l'objet Cours
-                tv_cours.refresh(); // Rafraîchir le TableView pour refléter les changements
+                tv_cours.refresh();
                 Alert BookAlert = new Alert(Alert.AlertType.INFORMATION);
                 BookAlert.setTitle("edit");
                 BookAlert.setHeaderText(null);

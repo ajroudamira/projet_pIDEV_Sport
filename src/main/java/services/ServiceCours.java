@@ -44,7 +44,7 @@ public class ServiceCours implements IService<Cours> {
         ResultSet rs = st.executeQuery(req);
         while (rs.next()) {
             TypeCours types = new TypeCours(rs.getInt("tc.id"), rs.getString("tc.nom"), rs.getString("tc.objective"), rs.getString("tc.description"), rs.getInt("tc.calories"));
-            Cours c = new Cours(rs.getInt("c.duree"), rs.getString("c.nom"), rs.getString("c.salle"), rs.getString("c.horaire"), types);
+            Cours c = new Cours(rs.getInt("c.id"), rs.getString("c.nom"), rs.getString("c.salle"),rs.getInt("c.duree"), rs.getString("c.horaire"), types);
             courss.add(c);
         }
         return courss;
@@ -132,6 +132,3 @@ public class ServiceCours implements IService<Cours> {
         return null; // Retourne null si aucun TypeCours correspondant n'est trouvé
     }
 }
-
-
-

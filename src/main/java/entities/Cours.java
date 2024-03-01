@@ -14,7 +14,7 @@ public class Cours {
 
     }
 
-    public Cours(int id, int duree, String nom, String salle, String horaire, int typeCoursId, TypeCours typeCours) {
+  /*  public Cours(int id, int duree, String nom, String salle, String horaire, int typeCoursId, TypeCours typeCours) {
         this.id = id;
         this.duree = duree;
         this.nom = nom;
@@ -22,7 +22,7 @@ public class Cours {
         this.horaire = horaire;
         this.typeCoursId = typeCoursId;
         this.typeCours = typeCours;
-    }
+    }*/
     public Cours( int duree, String nom, String salle, String horaire, /*int typeCoursId,*/ TypeCours typeCours) {
 
         this.duree = duree;
@@ -30,6 +30,16 @@ public class Cours {
         this.salle = salle;
         this.horaire = horaire;
        // this.typeCoursId = typeCoursId;
+        this.typeCours = typeCours;
+    }
+
+    public Cours(int id, String nom, String salle, int duree, String horaire, TypeCours typeCours) {
+        this.id = id;
+        this.duree = duree;
+        this.nom = nom;
+        this.salle = salle;
+        this.horaire = horaire;
+     //   this.typeCoursId = typeCoursId;
         this.typeCours = typeCours;
     }
 
@@ -97,7 +107,7 @@ public class Cours {
                 ", nom='" + nom + '\'' +
                 ", salle='" + salle + '\'' +
                 ", horaire='" + horaire + '\'' +
-                ", typeCoursId=" + typeCoursId +
+              //  ", typeCoursId=" + typeCoursId +
                 ", typeCours=" + typeCours +
                 '}';
     }
