@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="tf" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UpdateCategorieController">
+    <children>
+      <ImageView fitHeight="819.0" fitWidth="1000.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Downloads/ffff.png" />
+         </image>
+      </ImageView>
+        <TextField fx:id="tf_nom" layoutX="537.0" layoutY="283.0" prefHeight="50.0" prefWidth="174.0" />
+        <TextArea fx:id="tf_Desc" layoutX="537.0" layoutY="385.0" prefHeight="211.0" prefWidth="174.0" />
+        <Button layoutX="422.0" layoutY="669.0" mnemonicParsing="false" onAction="#OnAddClicked" prefHeight="50.0" prefWidth="94.0" style="-fx-background-color: transparent;" stylesheets="@style.css">
+         <styleClass>
+            <String fx:value="mouse-moved" />
+            <String fx:value="selected" />
+         </styleClass></Button>
+        <Button layoutX="605.0" layoutY="669.0" mnemonicParsing="false" onAction="#OnRetourClicked" prefHeight="50.0" prefWidth="94.0" style="-fx-background-color: transparent;" stylesheets="@style.css">
+         <styleClass>
+            <String fx:value="mouse-moved" />
+            <String fx:value="selected" />
+         </styleClass></Button>
+        <Label fx:id="errorLabelNom2" layoutX="171.0" layoutY="135.0" prefHeight="18.0" prefWidth="427.0" />
+        <Label fx:id="errorLabelDesc2" layoutX="171.0" layoutY="261.0" prefHeight="18.0" prefWidth="427.0" />
+      <Label fx:id="lb_id" layoutX="174.0" layoutY="22.0" prefHeight="58.0" prefWidth="147.0" />
+    </children>
+</AnchorPane>

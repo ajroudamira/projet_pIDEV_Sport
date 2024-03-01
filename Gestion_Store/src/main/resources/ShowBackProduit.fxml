@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ShowBackProduit">
+   <children>
+      <ImageView fitHeight="792.0" fitWidth="1234.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@kkkk.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="TableProduits" layoutX="258.0" layoutY="167.0" prefHeight="308.0" prefWidth="554.0">
+        <columns>
+          <TableColumn fx:id="colId" minWidth="0.0" prefWidth="0.0" text="id" />
+          <TableColumn fx:id="colNom" prefWidth="116.800048828125" text="Nom" />
+            <TableColumn fx:id="colPrix" prefWidth="122.39997863769531" text="Prix" />
+            <TableColumn fx:id="colDesc" prefWidth="430.4000244140625" text="Description" />
+            <TableColumn fx:id="colCateg" prefWidth="160.00006103515625" text="Categorie" />
+        </columns>
+      </TableView>
+      <Button layoutX="768.0" layoutY="610.0" mnemonicParsing="false" onAction="#OnSupprimerClicked" prefHeight="38.0" prefWidth="109.0" style="-fx-background-color: transparent;" stylesheets="@style.css">
+         <styleClass>
+            <String fx:value="mouse-moved" />
+            <String fx:value="seelected" />
+         </styleClass></Button>
+      <Button layoutX="528.0" layoutY="623.0" mnemonicParsing="false" onAction="#OnModifierClicked" prefHeight="38.0" prefWidth="109.0" style="-fx-background-color: transparent;" stylesheets="@style.css">
+         <styleClass>
+            <String fx:value="mouse-moved" />
+            <String fx:value="selected" />
+         </styleClass></Button>
+      <Button layoutX="292.0" layoutY="616.0" mnemonicParsing="false" onAction="#OnRetourClicked" prefHeight="38.0" prefWidth="109.0" style="-fx-background-color: transparent;" stylesheets="@style.css">
+         <styleClass>
+            <String fx:value="mouse-moved" />
+            <String fx:value="selected" />
+         </styleClass></Button>
+   </children>
+</AnchorPane>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddCategorieController">
+   <children>
+      <Label layoutX="26.0" layoutY="14.0" prefHeight="58.0" prefWidth="147.0" text="Ajouter Categorie" />
+      <Label layoutX="93.0" layoutY="110.0" text="Nom" />
+      <Label layoutX="89.0" layoutY="197.0" text="Description" />
+      <TextField fx:id="tf_nom" layoutX="173.0" layoutY="106.0" />
+      <TextArea fx:id="tf_Desc" layoutX="173.0" layoutY="158.0" prefHeight="96.0" prefWidth="222.0" />
+      <Button layoutX="133.0" layoutY="288.0" mnemonicParsing="false" onAction="#OnAddClicked" prefHeight="50.0" prefWidth="94.0" text="Ajouter" />
+      <Button layoutX="300.0" layoutY="288.0" mnemonicParsing="false" onAction="#OnRetourClicked" prefHeight="50.0" prefWidth="94.0" text="Retour" />
+      <Label fx:id="errorLabelNom2" layoutX="171.0" layoutY="135.0" prefHeight="18.0" prefWidth="427.0" />
+      <Label fx:id="errorLabelDesc2" layoutX="171.0" layoutY="261.0" prefHeight="18.0" prefWidth="427.0" />
+   </children>
+</AnchorPane>
