@@ -1,0 +1,10 @@
+
+W
+java:S1854"5Remove this useless assignment to local variable "e".(ä»½ºþÿÿÿÿ8«ú±¾Ù1
+H
+java:S1481"&Remove this unused "e" local variable.(ä»½ºþÿÿÿÿ8®ú±¾Ù1
+U	java:S106"9Replace this use of System.out or System.err by a logger.(à½¹÷8Ü…±¾Ù1
+]	java:S125"<This block of commented-out lines of code should be removed.(©Í¤©ýÿÿÿÿ8Ëä°¾Ù1
+]	java:S125"<This block of commented-out lines of code should be removed.(øÉâýÿÿÿÿ8±ú±¾Ù1
+T
+java:S1128"7Remove this unused import 'tn.esprit.utils.MyDatabase'.(ÁƒüÜ8žÐ°¾Ù1

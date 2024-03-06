@@ -5,17 +5,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class FXMain extends Application {
-    @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader=new FXMLLoader(FXMain.class.getResource("/gestion-type-view.fxml"));
-        Scene scene=new Scene(fxmlLoader.load());
-        stage.setTitle("Gym Sync");
-        stage.setScene(scene);
-        stage.show();
-    }
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws IOException {
+       FXMLLoader fxmlLoader=new FXMLLoader(FXMain.class.getResource("/ajouter-equipement-view.fxml"));//ADMIN
+        //FXMLLoader fxmlLoader=new FXMLLoader(FXMain.class.getResource("/user-equipement-view.fxml"));//USER
+
+        Scene scene=new Scene(fxmlLoader.load());
+        primaryStage.setTitle("Gym Sync");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 }

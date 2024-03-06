@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane onMouseClicked="#selectedEquipement" prefHeight="381.0" prefWidth="340.0" style="-fx-background-color: #e5ffdb; -fx-background-radius: 25; -fx-border-color: black; -fx-border-radius: 25; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.EquipementCardView">
+   <children>
+      <ImageView fx:id="img" fitHeight="163.0" fitWidth="254.0" layoutX="46.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <Text layoutX="46.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" />
+      <Text layoutX="45.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marque" />
+      <Text layoutX="46.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" />
+      <Text layoutX="46.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
+      <ImageView fx:id="imgetat" fitHeight="61.0" fitWidth="123.0" layoutX="206.0" layoutY="306.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@image/en_panne.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="lnom" layoutX="122.0" layoutY="215.0" text="Label" />
+      <Label fx:id="lmarque" layoutX="122.0" layoutY="246.0" text="Label" />
+      <Label fx:id="ltype" layoutX="122.0" layoutY="275.0" text="Label" />
+      <Label fx:id="ldate" layoutX="122.0" layoutY="314.0" text="Label" />
+   </children>
+</AnchorPane>

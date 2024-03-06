@@ -1,19 +1,24 @@
 package tn.esprit.entities;
+
 public class Type {
     private int id;
     private String nom;
     private String description;
+
     public Type() {
     }
+
     public Type(String nom, String description) {
         this.nom = nom;
         this.description = description;
     }
+
     public Type(int id, String nom, String description) {
         this.id = id;
         this.nom = nom;
         this.description = description;
     }
+
     public int getId() {
         return id;
     }
@@ -40,11 +45,6 @@ public class Type {
 
     @Override
     public String toString() {
-        return "Type{" +
-                "id=" + id +
-                ", nom='" + nom + '\'' +
-                ", description='" + description + '\'' +
-                '}'+'\n';
+        return "Nom: "+nom+" Description="+description;
     }
-
 }

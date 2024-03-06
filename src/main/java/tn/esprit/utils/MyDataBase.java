@@ -1,17 +1,16 @@
 package tn.esprit.utils;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class MyDataBase {
+public class MyDatabase {
     private final String URL="jdbc:mysql://127.0.0.1:3306/gymsync";
     private final String USER="root";
     private final String PWD="";
     private Connection cnx;
-    private static MyDataBase instance;
-    private MyDataBase(){
+    private static MyDatabase instance;
+    private MyDatabase(){
         try {
             cnx= DriverManager.getConnection(URL,USER,PWD);
             System.out.println("Connexion etablie");
@@ -19,9 +18,9 @@ public class MyDataBase {
             System.out.println("erreur:"+e.getMessage());
         }
     }
-    public static MyDataBase getInstance(){
+    public static MyDatabase getInstance(){
         if(instance==null){
-            instance=new MyDataBase();
+            instance=new MyDatabase();
         }
         else{
             System.out.println("deja connecter");
@@ -35,4 +34,3 @@ public class MyDataBase {
 
 
 }
-
