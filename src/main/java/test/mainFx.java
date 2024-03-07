@@ -17,8 +17,8 @@ public class mainFx extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
      try {
-         Parent root = FXMLLoader.load(getClass().getResource("/Front_Produit.fxml"));
-        //Parent root = FXMLLoader.load(getClass().getResource("/BackHome.fxml"));
+//         Parent root = FXMLLoader.load(getClass().getResource("/Front_Produit.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/BackHome.fxml"));
         primaryStage.setTitle("FXML Welcome");
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
