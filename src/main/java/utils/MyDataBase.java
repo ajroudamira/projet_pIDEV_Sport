@@ -1,38 +1,33 @@
 package utils;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class MyDataBase {
-    private final String URL="jdbc:mysql://127.0.0.1:3306/gymsync";
-    private final String USER="root";
-    private final String PWD="";
-    private Connection cnx;
-    private static MyDataBase instance;
-    private MyDataBase(){
+public class MyDatabase {
+
+    final String URL="jdbc:mysql://localhost:3306/gymsync";
+    final String USERNAME="root";
+    final String PASSWORD="";
+    static MyDatabase instance;
+    Connection connection;
+    private MyDatabase(){
         try {
-            cnx= DriverManager.getConnection(URL,USER,PWD);
+            connection= DriverManager.getConnection(URL,USERNAME,PASSWORD);
             System.out.println("Connexion etablie");
         } catch (SQLException e) {
-            System.out.println("erreur:"+e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
-    public static MyDataBase getInstance(){
+    public  static MyDatabase getInstance(){
         if(instance==null){
-            instance=new MyDataBase();
-        }
-        else{
-            System.out.println("deja connecter");
+            instance= new MyDatabase();
         }
         return instance;
 
     }
-    public Connection getCnx(){
-        return cnx;
+
+    public Connection getConnection() {
+        return connection;
     }
-
-
 }
-

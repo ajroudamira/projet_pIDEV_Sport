@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddProductController">
+   <children>
+      <ImageView fitHeight="820.0" fitWidth="1006.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@eeee.png" />
+         </image>
+      </ImageView>
+      <TextArea fx:id="tf_desc" layoutX="538.0" layoutY="429.0" prefHeight="128.0" prefWidth="180.0" style="-fx-background-color: transparent;" stylesheets="@style.css" />
+      <TextField fx:id="tf_nom" layoutX="546.0" layoutY="239.0" prefHeight="42.0" prefWidth="167.0" style="-fx-background-color: transparent;" />
+      <TextField fx:id="tf_prix" layoutX="544.0" layoutY="338.0" prefHeight="42.0" prefWidth="167.0" style="-fx-background-color: transparent;" />
+      <ComboBox fx:id="ComboCatrgorie" layoutX="548.0" layoutY="589.0" prefWidth="150.0" />
+      <Button fx:id="ajouterProduit" layoutX="455.0" layoutY="681.0" mnemonicParsing="false" onAction="#OnAjouterClicked" style="-fx-background-color: transparent;" stylesheets="@style.css">
+         <styleClass>
+            <String fx:value="mouse-moved" />
+            <String fx:value="selected" />
+         </styleClass></Button>
+      <Button layoutX="628.0" layoutY="681.0" mnemonicParsing="false" onAction="#GoBack" style="-fx-background-color: transparent;" stylesheets="@style.css">
+         <styleClass>
+            <String fx:value="mouse-moved" />
+            <String fx:value="selected" />
+         </styleClass></Button>
+      <Label fx:id="errorLabelNom" layoutX="379.0" layoutY="298.0" prefHeight="18.0" prefWidth="381.0" />
+      <Label fx:id="errorLabelPrix" layoutX="379.0" layoutY="392.0" prefHeight="18.0" prefWidth="382.0" />
+      <Label fx:id="errorLabelDesc" layoutX="379.0" layoutY="569.0" prefHeight="18.0" prefWidth="382.0" />
+      <Button fx:id="addImageButton" layoutX="90.0" layoutY="557.0" mnemonicParsing="false" onAction="#OnAddImageButtonClicked" prefHeight="42.0" prefWidth="130.0" text="Ajouter Image" />
+      <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" layoutX="55.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
