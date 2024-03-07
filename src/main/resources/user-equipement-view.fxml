@@ -17,7 +17,7 @@
             <Image url="@image/Blue%20and%20White%20Modern%20Business%20Facebook%20Cover%20(6).png" />
          </image>
       </ImageView>
-      <ScrollPane layoutX="92.0" layoutY="239.0" prefHeight="478.0" prefWidth="855.0">
+      <ScrollPane layoutX="92.0" layoutY="239.0" prefHeight="478.0" prefWidth="688.0">
          <content>
             <GridPane fx:id="grid">
               <rowConstraints>
@@ -27,8 +27,11 @@
          </content>
       </ScrollPane>
       <TextField layoutX="122.0" layoutY="190.0" prefHeight="25.0" prefWidth="79.0" promptText="Recherche" style="-fx-background-color: transparent;" />
-      <ComboBox layoutX="1149.0" layoutY="254.0" prefHeight="25.0" prefWidth="113.0" promptText="Type" />
-      <ComboBox layoutX="977.0" layoutY="254.0" prefHeight="25.0" prefWidth="113.0" promptText="Tri" />
+      <ComboBox fx:id="cbtype" layoutX="1149.0" layoutY="239.0" prefHeight="25.0" prefWidth="113.0" promptText="Type" />
+      <ComboBox fx:id="cbtri" layoutX="977.0" layoutY="240.0" prefHeight="25.0" prefWidth="113.0" promptText="Tri" />
       <Button layoutX="1034.0" layoutY="187.0" mnemonicParsing="false" style="-fx-background-color: transparent;" />
+      <TextField fx:id="tfrecherche" layoutX="122.0" layoutY="172.0" prefHeight="63.0" prefWidth="113.0" promptText="Recherche" style="-fx-background-color: transparent;" />
+      <Button layoutX="969.0" layoutY="175.0" mnemonicParsing="false" onAction="#tri" prefHeight="55.0" prefWidth="133.0" style="-fx-background-color: transparent;" />
+      <Button layoutX="1139.0" layoutY="176.0" mnemonicParsing="false" onAction="#filtre" prefHeight="55.0" prefWidth="133.0" style="-fx-background-color: transparent;" />
    </children>
 </AnchorPane>

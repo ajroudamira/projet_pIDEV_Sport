@@ -4,23 +4,37 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane onMouseClicked="#selectedEquipement" prefHeight="381.0" prefWidth="340.0" style="-fx-background-color: #e5ffdb; -fx-background-radius: 25; -fx-border-color: black; -fx-border-radius: 25; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.EquipementCardView">
+<AnchorPane onMouseClicked="#selectedEquipement" prefHeight="378.0" prefWidth="278.0" style="-fx-background-color: #ffffff; -fx-background-radius: 25; -fx-border-color: black; -fx-border-radius: 25; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controller.EquipementCardView">
    <children>
-      <ImageView fx:id="img" fitHeight="163.0" fitWidth="254.0" layoutX="46.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-      <Text layoutX="46.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" />
-      <Text layoutX="45.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marque" />
-      <Text layoutX="46.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" />
-      <Text layoutX="46.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" />
-      <ImageView fx:id="imgetat" fitHeight="61.0" fitWidth="123.0" layoutX="206.0" layoutY="306.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="img" fitHeight="178.0" fitWidth="205.0" layoutX="37.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fill="#357934" layoutX="36.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Text fill="#357934" layoutX="35.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marque">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Text fill="#357934" layoutX="36.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Text fill="#357934" layoutX="36.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Text>
+      <Label fx:id="lnom" layoutX="102.0" layoutY="215.0" text="Label" />
+      <Label fx:id="lmarque" layoutX="102.0" layoutY="246.0" text="Label" />
+      <Label fx:id="ltype" layoutX="102.0" layoutY="275.0" text="Label" />
+      <Label fx:id="ldate" layoutX="102.0" layoutY="304.0" text="Label" />
+      <ImageView fx:id="imgetat" fitHeight="39.0" fitWidth="77.0" layoutX="182.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@image/en_panne.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="lnom" layoutX="122.0" layoutY="215.0" text="Label" />
-      <Label fx:id="lmarque" layoutX="122.0" layoutY="246.0" text="Label" />
-      <Label fx:id="ltype" layoutX="122.0" layoutY="275.0" text="Label" />
-      <Label fx:id="ldate" layoutX="122.0" layoutY="314.0" text="Label" />
+      <ImageView fx:id="qrcodeimg" fitHeight="80.0" fitWidth="93.0" layoutX="177.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

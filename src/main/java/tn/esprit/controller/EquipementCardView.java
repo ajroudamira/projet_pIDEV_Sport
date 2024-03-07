@@ -1,5 +1,6 @@
 package tn.esprit.controller;
 
+import com.google.zxing.WriterException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -8,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import tn.esprit.entities.Equipement;
 import tn.esprit.services.OnChangeListener;
 import tn.esprit.services.ServiceType;
+import tn.esprit.utils.QrCodeGenerator;
 
 import java.io.File;
 
@@ -31,7 +33,8 @@ public class EquipementCardView
 
     @FXML
     private Label ldate;
-
+    @FXML
+    private ImageView qrcodeimg;
     @FXML
     public void initialize() {
         imgetat.setVisible(false);
@@ -57,9 +60,17 @@ public class EquipementCardView
         if(e.isEtat()==false){
             imgetat.setVisible(true);
         }
-        File file=new File("C:\\Users\\pc\\Desktop\\pi\\Gymsync\\src\\main\\resources\\image\\"+e.getImage());
+        File file=new File("C:\\Users\\pc\\Desktop\\PiDEV\\Gymsync\\src\\main\\resources\\image\\"+e.getImage());
         Image image=new Image(file.toURI().toString());
         img.setImage(image);
+        try {
+            QrCodeGenerator.GenerateQrCode(e.toString(),e.getId());
+        } catch (WriterException ex) {
+            throw new RuntimeException(ex);
+        }
+        File file2=new File("C:\\Users\\pc\\Desktop\\PiDEV\\Gymsync\\src\\main\\resources\\qrcode\\Equipement_"+e.getId()+".png");
+        Image image2=new Image(file2.toURI().toString());
+        qrcodeimg.setImage(image2);
     }
     @FXML
     void selectedEquipement(MouseEvent event) {

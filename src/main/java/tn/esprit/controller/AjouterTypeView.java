@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import tn.esprit.FXMain;
 import tn.esprit.entities.Type;
@@ -116,6 +117,13 @@ public class AjouterTypeView {
         stage1.setScene(new Scene(root));
         stage1.setTitle("GymSync");
         stage1.show();
+    }
+    @FXML
+    void fillforum(MouseEvent event) {
+        if(listview.getSelectionModel().getSelectedItem()!=null){
+            tfnom.setText(listview.getSelectionModel().getSelectedItem().getNom());
+            tadesc.setText(listview.getSelectionModel().getSelectedItem().getDescription());
+        }
     }
 
 

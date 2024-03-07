@@ -45,6 +45,6 @@ public class Type {
 
     @Override
     public String toString() {
-        return "Nom: "+nom+" Description="+description;
+        return "Nom : "+nom+"                   Description : "+description;
     }
 }

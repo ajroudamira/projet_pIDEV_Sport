@@ -1,0 +1,19 @@
+
+k
+java:S1192"IDefine a constant instead of duplicating this literal "erreur: " 4 times.(ö³¶ıÿÿÿÿ8£œ¤Ìà1
+d
+java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(ŸÒ‰×8Ëœ¤Ìà1
+d
+java:S2095="GUse try-with-resources or close this "Statement" in a "finally" clause.(ŸÒ‰×8Íœ¤Ìà1
+d
+java:S20951"GUse try-with-resources or close this "Statement" in a "finally" clause.(ŸÒ‰×8Íœ¤Ìà1
+d
+java:S2095&"GUse try-with-resources or close this "Statement" in a "finally" clause.(ŸÒ‰×8Íœ¤Ìà1
+Z	java:S106"9Replace this use of System.out or System.err by a logger.(ö³¶ıÿÿÿÿ8Õœ¤Ìà1
+Z	java:S106)"9Replace this use of System.out or System.err by a logger.(ö³¶ıÿÿÿÿ8Úœ¤Ìà1
+Z	java:S1064"9Replace this use of System.out or System.err by a logger.(ö³¶ıÿÿÿÿ8Ûœ¤Ìà1
+Z	java:S106G"9Replace this use of System.out or System.err by a logger.(ö³¶ıÿÿÿÿ8Şœ¤Ìà1
+]	java:S125U"<This block of commented-out lines of code should be removed.(ŒıÎˆıÿÿÿÿ8åœ¤Ìà1
+X	java:S125^"<This block of commented-out lines of code should be removed.(±©«›8êœ¤Ìà1
+Z
+java:S1128"8Remove this unused import 'java.util.stream.Collectors'.(Óóº´úÿÿÿÿ8êœ¤Ìà1

@@ -1,5 +1,8 @@
 package tn.esprit.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,11 +14,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import tn.esprit.FXMain;
 import tn.esprit.entities.Equipement;
 import tn.esprit.services.OnChangeListener;
 import tn.esprit.services.ServiceEquipement;
 import tn.esprit.services.ServiceType;
+import tn.esprit.utils.ExportToExcel;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +30,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.util.List;
 
-public class AjouterEquipementView implements OnChangeListener {
+public class AjouterEquipementView  {
 
     @FXML
     private TextField tfnom;
@@ -54,17 +60,35 @@ public class AjouterEquipementView implements OnChangeListener {
     private TextArea tadesc;
     @FXML
     private DatePicker dpdate;
-    @FXML
-    private GridPane grid;
+
     @FXML
     private Label idgetter;
+
+
+    @FXML
+    private ComboBox<String> cbtri;
     ServiceEquipement se=new ServiceEquipement();
     ServiceType st=new ServiceType();
     @FXML
     public void initialize() {
         tfimage.setDisable(true);
         cbtype.getItems().setAll(st.getAllTypeName());
-        refresh();
+        if(AfficherEquipementAdmin.idModifier!=0){
+            Equipement equipement=se.getEquipementById(AfficherEquipementAdmin.idModifier);
+
+            tfimage.setText(equipement.getImage());
+            tfcouleur.setText(equipement.getCouleur());
+            tfmarque.setText(equipement.getMarque());
+            tadesc.setText(equipement.getDescription());
+            tfmatiere.setText(equipement.getMatiere());
+            tfnom.setText(equipement.getNom());
+            tfmodele.setText(equipement.getModele());
+            tftaille.setText(equipement.getTaille());
+            cbtype.setValue(st.getTypeParId(equipement.getIdType()).getNom());
+            dpdate.setValue(Instant.ofEpochMilli(equipement.getDate_de_fabrication().getTime())
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate());
+        }
     }
     public String controleDeSaisie(){
         String erreur="";
@@ -123,7 +147,8 @@ public class AjouterEquipementView implements OnChangeListener {
 
             e.setIdType(st.getIdtypeByNom(cbtype.getValue()));
             se.ajouter(e);
-            refresh();
+            //NOTIFICATION
+            Notifications.create().title("Ajout equipement").text("Ajout avec succes").hideAfter(Duration.seconds(5)).showInformation();
         }
 
 
@@ -131,62 +156,37 @@ public class AjouterEquipementView implements OnChangeListener {
     }
     @FXML
     void modifierEquipement(ActionEvent event) {
-        if(controleDeSaisie().length()>0){
-            Alert alert=new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Formulaire invalide!");
-            alert.setContentText(controleDeSaisie());
-            alert.showAndWait();
-        }
-        else{
-            Equipement e=new Equipement();
-            e.setNom(tfnom.getText());
-            e.setDescription(tadesc.getText());
-            e.setCouleur(tfcouleur.getText());
-            e.setImage(tfimage.getText());
-            e.setMarque(tfmarque.getText());
-            e.setMatiere(tfmatiere.getText());
-            e.setModele(tfmodele.getText());
-            e.setTaille(tftaille.getText());
-            e.setEtat(true);
-            e.setDate_de_fabrication(Date.valueOf(dpdate.getValue()));
-
-            e.setIdType(st.getIdtypeByNom(cbtype.getValue()));
-            se.modifier(Integer.valueOf(idgetter.getText()),e);
-            refresh();
-        }
-
-    }
-
-    @FXML
-    void supprimerEquipement(ActionEvent event) {
-        se.supprimer(Integer.valueOf(idgetter.getText()));
-        refresh();
-    }
-
-    public void refresh(){
-        grid.getChildren().clear();
-        List<Equipement> list=se.afficher();
-        int column=0;
-        int row=1;
-        for(Equipement e:list){
-            FXMLLoader card=new FXMLLoader(FXMain.class.getResource("/equipement-card-view.fxml"));
-            AnchorPane anchorPane= null;
-            try {
-                anchorPane = card.load();
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
+        if(AfficherEquipementAdmin.idModifier!=0){
+            if(controleDeSaisie().length()>0){
+                Alert alert=new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Formulaire invalide!");
+                alert.setContentText(controleDeSaisie());
+                alert.showAndWait();
             }
-            EquipementCardView controller=card.getController();
-            controller.remplireData(e);
-            controller.setOnChangeListener(this);
-            if(column==2){
-                column=0;
-                row++;
+            else{
+                Equipement e=new Equipement();
+                e.setNom(tfnom.getText());
+                e.setDescription(tadesc.getText());
+                e.setCouleur(tfcouleur.getText());
+                e.setImage(tfimage.getText());
+                e.setMarque(tfmarque.getText());
+                e.setMatiere(tfmatiere.getText());
+                e.setModele(tfmodele.getText());
+                e.setTaille(tftaille.getText());
+                e.setEtat(true);
+                e.setDate_de_fabrication(Date.valueOf(dpdate.getValue()));
+
+                e.setIdType(st.getIdtypeByNom(cbtype.getValue()));
+                se.modifier(AfficherEquipementAdmin.idModifier,e);
             }
-            grid.add(anchorPane,column++,row);
-            GridPane.setMargin(anchorPane,new Insets(10));
         }
+
+
     }
+
+
+
+
 
     @FXML
     void uploadImage(ActionEvent event) {
@@ -199,22 +199,7 @@ public class AjouterEquipementView implements OnChangeListener {
         }
     }
 
-    @Override
-    public void sendEquipementData(Equipement equipement) {
-        idgetter.setText(String.valueOf(equipement.getId()));
-        tfimage.setText(equipement.getImage());
-        tfcouleur.setText(equipement.getCouleur());
-        tfmarque.setText(equipement.getMarque());
-        tadesc.setText(equipement.getDescription());
-        tfmatiere.setText(equipement.getMatiere());
-        tfnom.setText(equipement.getNom());
-        tfmodele.setText(equipement.getModele());
-        tftaille.setText(equipement.getTaille());
-        cbtype.setValue(st.getTypeParId(equipement.getIdType()).getNom());
-        dpdate.setValue(Instant.ofEpochMilli(equipement.getDate_de_fabrication().getTime())
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate());
-    }
+
     @FXML
     void gotoGestionType(ActionEvent event) {
         FXMLLoader fxmlLoader = new FXMLLoader(FXMain.class.getResource("/ajouter-type-view.fxml"));
@@ -233,4 +218,24 @@ public class AjouterEquipementView implements OnChangeListener {
 
 
     }
+    @FXML
+    void gotoAfficher(ActionEvent event) {
+        FXMLLoader fxmlLoader = new FXMLLoader(FXMain.class.getResource("/afficher-equipement-admin.fxml"));
+        Parent root;
+        try {
+            root = fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stage = (Stage) tfcouleur.getScene().getWindow();
+        stage.close();
+        Stage stage1 = new Stage();
+        stage1.setScene(new Scene(root));
+        stage1.setTitle("GymSync");
+        stage1.show();
+    }
+
+
+
+
 }

@@ -15,8 +15,8 @@ public class FXMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-       FXMLLoader fxmlLoader=new FXMLLoader(FXMain.class.getResource("/ajouter-equipement-view.fxml"));//ADMIN
-        //FXMLLoader fxmlLoader=new FXMLLoader(FXMain.class.getResource("/user-equipement-view.fxml"));//USER
+        FXMLLoader fxmlLoader=new FXMLLoader(FXMain.class.getResource("/ajouter-equipement-view.fxml"));//ADMIN
+       //FXMLLoader fxmlLoader=new FXMLLoader(FXMain.class.getResource("/user-equipement-view.fxml"));//USER
 
         Scene scene=new Scene(fxmlLoader.load());
         primaryStage.setTitle("Gym Sync");

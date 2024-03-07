@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MyDatabase {
-    private final String URL="jdbc:mysql://127.0.0.1:3306/gymsync";
+    private final String URL="jdbc:mysql://127.0.0.1:3306/gym";
     private final String USER="root";
     private final String PWD="";
     private Connection cnx;

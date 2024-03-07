@@ -9,7 +9,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ServiceEquipement implements IService<Equipement>{
     private Connection cnx;
@@ -110,5 +112,26 @@ public class ServiceEquipement implements IService<Equipement>{
         }
 
         return le;
+    }
+    public Equipement getEquipementById(int id){
+        return afficher().stream().filter(e->e.getId()==id).findFirst().orElse(null);
+    }
+    public List<Equipement> triEquipementParCritere(String critere){
+        switch (critere){
+            case "Nom":
+                return afficher().stream().sorted(Comparator.comparing(Equipement::getNom)).collect(Collectors.toList());
+            case "Description":
+                return afficher().stream().sorted(Comparator.comparing(Equipement::getDescription)).collect(Collectors.toList());
+            case "Date":
+                return afficher().stream().sorted(Comparator.comparing(Equipement::getDate_de_fabrication)).collect(Collectors.toList());
+            case "Type":
+                return afficher().stream().sorted(Comparator.comparing(Equipement::getIdType)).collect(Collectors.toList());
+            case "Marque":
+                return afficher().stream().sorted(Comparator.comparing(Equipement::getMarque)).collect(Collectors.toList());
+        }
+        return afficher();
+    }
+    public List<Equipement> getEquipementsParType(int idType){
+        return afficher().stream().filter(e->e.getIdType()==idType).collect(Collectors.toList());
     }
 }
