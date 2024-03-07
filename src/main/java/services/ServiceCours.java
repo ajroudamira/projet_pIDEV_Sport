@@ -70,23 +70,25 @@ public class ServiceCours implements IService<Cours> {
         }
     }
 
-    public boolean modifier(String nom, int id) throws SQLException {
+    public boolean modifier(String nom, String salle, int duree, String horaire, int id) throws SQLException {
         try {
-            PreparedStatement pre = connection.prepareStatement("update Cours set nom =? where id=? ;");
+            PreparedStatement pre = connection.prepareStatement("UPDATE Cours SET nom = ?, salle = ?, duree = ?, horaire = ? WHERE id = ?");
 
             pre.setString(1, nom);
-            pre.setInt(2, id);
+            pre.setString(2, salle);
+            pre.setInt(3, duree);
+            pre.setString(4, horaire);
+            pre.setInt(5, id);
 
             if (pre.executeUpdate() != 0) {
-                System.out.println(" updated");
+                System.out.println("Updated");
                 return true;
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        System.out.println("id  not found!!!");
+        System.out.println("Id not found!!!");
         return false;
-
     }
 
     public boolean isNomExist(String nom) throws SQLException {
@@ -130,5 +132,23 @@ public class ServiceCours implements IService<Cours> {
             e.printStackTrace();
         }
         return null; // Retourne null si aucun TypeCours correspondant n'est trouvé
+    }
+    public List<TypeCours> getAllTypesCours() throws SQLException {
+        List<TypeCours> types = new ArrayList<>();
+        String query = "SELECT * FROM type_cours";
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                TypeCours typeCours = new TypeCours(
+                    //   resultSet.getInt("id"),
+                        resultSet.getString("nom"),
+                        resultSet.getString("objective"),
+                      resultSet.getString("description"),
+                       resultSet.getInt("calories")
+                );
+                types.add(typeCours);
+            }
+        }
+        return types;
     }
 }

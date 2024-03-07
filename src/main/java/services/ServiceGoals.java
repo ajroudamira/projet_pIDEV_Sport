@@ -37,7 +37,7 @@ public class ServiceGoals {
     } */
    public List<Goals> getAllGoals() throws SQLException {
        List<Goals> goalsList = new ArrayList<>();
-       String query = "SELECT c.nom, c.salle, tc.objective, tc.calories " +
+       String query = "SELECT c.nom, c.salle, c.duree, c.horaire , tc.objective, tc.calories " +
                "FROM cours c " +
                "INNER JOIN type_cours tc ON c.type_cours_id = tc.id";
        try (Statement statement = connection.createStatement();
@@ -45,9 +45,11 @@ public class ServiceGoals {
            while (resultSet.next()) {
                String nom = resultSet.getString("nom");
                String salle = resultSet.getString("salle");
+               int duree = resultSet.getInt("duree");
+               String horaire = resultSet.getString("horaire");
                String objective = resultSet.getString("objective");
                int calories = resultSet.getInt("calories");
-               Goals goal = new Goals(nom, salle, objective, calories);
+               Goals goal = new Goals(nom, salle,horaire,objective, calories, duree);
                goalsList.add(goal);
            }
        }

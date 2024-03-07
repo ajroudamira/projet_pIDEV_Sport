@@ -89,23 +89,25 @@ public class ServiceType implements  IService<TypeCours>{
         }
     }
 
-    public boolean modifier(int calories, int id) throws SQLException {
+    public boolean modifier(String nom, String objectif, String description, int calories, int id) throws SQLException {
         try {
-            PreparedStatement pre = connection.prepareStatement("update type_cours set calories =? where id=? ;");
+            PreparedStatement pre = connection.prepareStatement("UPDATE type_cours SET nom = ?, objectif = ?, description = ?, calories = ? WHERE id = ?");
 
-            pre.setInt(1, calories );
-            pre.setInt(2, id);
+            pre.setString(1, nom);
+            pre.setString(2, objectif);
+            pre.setString(3, description);
+            pre.setInt(4, calories);
+            pre.setInt(5, id);
 
             if (pre.executeUpdate() != 0) {
-                System.out.println(" updated");
+                System.out.println("Updated");
                 return true;
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        System.out.println("id  not found!!!");
+        System.out.println("Id not found!!!");
         return false;
-
     }
     public boolean isNomExist(String nom) throws SQLException {
         // Écrire votre requête SQL pour vérifier si le nom existe déjà dans votre base de données

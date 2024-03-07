@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="338.0" prefWidth="616.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
+   <children>
+      <Pane prefHeight="342.0" prefWidth="616.0">
+         <children>
+            <Pane prefHeight="348.0" prefWidth="616.0">
+               <children>
+                  <ImageView fitHeight="356.0" fitWidth="616.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/kh.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="plan" layoutX="95.0" layoutY="29.0" onMouseClicked="#goplan" text="PLANNING" textFill="#eaefef">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="177.0" layoutY="29.0" text="EQUIPEMENT" textFill="#f7f4f4">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="420.0" layoutY="29.0" text="SHOP" textFill="#faf6f6">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="504.0" layoutY="29.0" text="CONTACT" textFill="#fcfafa">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Label>
+                  <Pane layoutX="584.0" layoutY="29.0" prefHeight="16.0" prefWidth="18.0">
+                     <children>
+                        <ImageView fx:id="adm" fitHeight="16.0" fitWidth="18.0" layoutX="1.0" onMouseClicked="#godash" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/adm.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

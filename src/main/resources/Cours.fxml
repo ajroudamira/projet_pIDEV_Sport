@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
@@ -12,38 +13,38 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="460.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CoursController">
+<AnchorPane prefHeight="343.0" prefWidth="610.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CoursController">
    <children>
 
-      <TextField fx:id="tf_nom" layoutX="285.0" layoutY="169.0" />
-      <TextField fx:id="tf_duree" layoutX="285.0" layoutY="232.0" />
-      <TextField fx:id="tf_horaire" layoutX="499.0" layoutY="232.0" />
-      <TextField fx:id="tf_salle" layoutX="499.0" layoutY="169.0" />
-      <Label layoutX="285.0" layoutY="147.0" text="○ Nom">
+      <TextField fx:id="tf_nom" layoutX="223.0" layoutY="117.0" />
+      <TextField fx:id="tf_duree" layoutX="223.0" layoutY="180.0" />
+      <TextField fx:id="tf_horaire" layoutX="437.0" layoutY="180.0" />
+      <TextField fx:id="tf_salle" layoutX="437.0" layoutY="117.0" />
+      <Label layoutX="223.0" layoutY="95.0" text="○ Nom">
          <font>
             <Font name="Times New Roman Bold" size="15.0" />
          </font></Label>
-      <Label layoutX="281.0" layoutY="214.0" text="○ Duree">
+      <Label layoutX="219.0" layoutY="162.0" text="○ Duree">
          <font>
             <Font name="Times New Roman Bold" size="15.0" />
          </font></Label>
-      <Label layoutX="499.0" layoutY="214.0" text="○ Horaire">
+      <Label layoutX="437.0" layoutY="162.0" text="○ Horaire">
          <font>
             <Font name="Times New Roman Bold" size="15.0" />
          </font></Label>
-      <Label layoutX="499.0" layoutY="147.0" text="○ Salle">
+      <Label layoutX="437.0" layoutY="95.0" text="○ Salle">
          <font>
             <Font name="Times New Roman Bold" size="15.0" />
          </font></Label>
-      <Button layoutX="319.0" layoutY="358.0" mnemonicParsing="false" onAction="#AjouterCours" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: #4C4C4CFF;" text="Ajouter" textFill="#faf8f8">
+      <Button layoutX="250.0" layoutY="269.0" mnemonicParsing="false" onAction="#AjouterCours" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: #4E705D;" text="Ajouter" textFill="#faf8f8">
          <font>
             <Font name="Trebuchet MS Bold" size="13.0" />
          </font></Button>
-      <Button layoutX="494.0" layoutY="358.0" mnemonicParsing="false" onAction="#AfficherCours" prefHeight="26.0" prefWidth="123.0" style="-fx-background-color: #4C4C4CFF;" text="Afficher" textFill="#fcf8f8">
+      <Button layoutX="443.0" layoutY="268.0" mnemonicParsing="false" onAction="#AfficherCours" prefHeight="26.0" prefWidth="123.0" style="-fx-background-color: #4E705D;" text="Afficher" textFill="#fcf8f8">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Button>
-      <VBox alignment="TOP_RIGHT" layoutX="-8.0" prefHeight="460.0" prefWidth="235.0" style="-fx-background-color: #4C4C4CFF;">
+      <VBox alignment="TOP_RIGHT" layoutY="-5.0" prefHeight="399.0" prefWidth="186.0" style="-fx-background-color: #4E705D;">
          <children>
             <HBox prefHeight="42.0" prefWidth="250.0">
                <children>
@@ -59,88 +60,73 @@
                   </ImageView>
                </children>
             </HBox>
-            <Pane prefHeight="412.0" prefWidth="238.0">
+            <Pane prefHeight="334.0" prefWidth="166.0">
                <children>
-                  <Label layoutX="101.0" layoutY="12.0" text="Users" textFill="#f2f1f1">
+                  <Label layoutX="83.0" layoutY="5.0" text="Users" textFill="#f2f1f1">
                      <font>
                         <Font name="Trebuchet MS" size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="95.0" layoutY="61.0" text="Planning" textFill="#1bb99a">
+                  <Label fx:id="tf_back" layoutX="82.0" layoutY="52.0" onMouseClicked="#AffichBg" text="Planning" textFill="#171818">
                      <font>
                         <Font name="Trebuchet MS Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="96.0" layoutY="178.0" text="Equipement" textFill="#f7f4f4">
+                  <Label layoutX="72.0" layoutY="151.0" text="Equipement" textFill="#f7f4f4">
                      <font>
                         <Font name="Trebuchet MS" size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="101.0" layoutY="238.0" text="Store" textFill="#f4f2f2">
+                  <Label layoutX="83.0" layoutY="203.0" text="Store" textFill="#f4f2f2">
                      <font>
                         <Font name="Trebuchet MS" size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="99.0" layoutY="299.0" text="Cart" textFill="#f7f5f5">
+                  <Label layoutX="86.0" layoutY="248.0" text="Cart" textFill="#f7f5f5">
                      <font>
                         <Font name="Trebuchet MS" size="15.0" />
                      </font>
                   </Label>
-                  <Label layoutX="165.0" layoutY="363.0" text="Settings" textFill="#faf8f8">
-                     <font>
-                        <Font name="Trebuchet MS" size="15.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="19.0" fitWidth="29.0" layoutX="63.0" layoutY="299.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="19.0" fitWidth="29.0" layoutX="59.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cart-59-16.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="26.0" fitWidth="25.0" layoutX="60.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="26.0" fitWidth="25.0" layoutX="48.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/store-16.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="56.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="43.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/dumbbell-16.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="19.0" fitWidth="19.0" layoutX="139.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/settings-16.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="60.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="46.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/user-6-16.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="39.0" fitWidth="48.0" layoutX="49.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="32.0" fitWidth="26.0" layoutX="45.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/marketing-strategy.png" />
+                        <Image url="@images/planning.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="18.0" fitWidth="19.0" layoutX="201.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/arrow-204-16.png" />
-                     </image>
-                  </ImageView>
-                  <Separator layoutX="19.0" layoutY="45.0" prefWidth="200.0" />
-                  <Label layoutX="108.0" layoutY="90.0" text="Cours" textFill="#f9fcfc">
-                     <font>
-                        <Font name="Trebuchet MS Bold" size="16.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="113.0" layoutY="122.0" text="Type" textFill="#f7f6f6">
+                  <Separator layoutY="34.0" prefHeight="17.0" prefWidth="170.0" />
+                  <Label layoutX="96.0" layoutY="87.0" text="Cours" textFill="#faf6f6">
                      <font>
                         <Font name="Trebuchet MS" size="14.0" />
                      </font>
                   </Label>
-                  <Separator layoutX="19.0" layoutY="157.0" prefWidth="200.0" />
-                  <Separator layoutX="25.0" layoutY="219.0" prefWidth="200.0" />
-                  <Separator layoutX="25.0" layoutY="275.0" prefWidth="200.0" />
-                  <Label layoutX="84.0" layoutY="89.0" text="    _" textFill="#f6fafa">
+                  <Label layoutX="95.0" layoutY="103.0" text="Type" textFill="#f7f6f6">
+                     <font>
+                        <Font name="Trebuchet MS Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="2.0" layoutY="114.0" prefHeight="46.0" prefWidth="170.0" />
+                  <Separator layoutX="-6.0" layoutY="174.0" prefHeight="24.0" prefWidth="178.0" />
+                  <Separator layoutX="-6.0" layoutY="222.0" prefHeight="21.0" prefWidth="178.0" />
+                  <Label layoutX="71.0" layoutY="103.0" text="    _" textFill="#efebeb">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -149,17 +135,12 @@
             </Pane>
          </children>
       </VBox>
-      <HBox layoutX="227.0" layoutY="404.0" prefHeight="55.0" prefWidth="600.0" style="-fx-background-color: #D3D3D3;">
-         <children>
-            <Pane prefHeight="100.0" prefWidth="162.0" />
-         </children>
-      </HBox>
-      <Label layoutX="247.0" layoutY="73.0" text="Ajouter Un Cours !">
+      <Label layoutX="250.0" layoutY="46.0" text="Ajouter Un Cours !">
          <font>
             <Font name="Times New Roman Bold" size="30.0" />
          </font>
       </Label>
-      <HBox alignment="TOP_RIGHT" layoutX="227.0" prefHeight="46.0" prefWidth="600.0" style="-fx-background-color: #D3D3D3;">
+      <HBox alignment="TOP_RIGHT" layoutX="186.0" prefHeight="46.0" prefWidth="424.0" style="-fx-background-color: #D3D3D3;">
          <children>
             <Pane prefHeight="37.0" prefWidth="36.0">
                <children>
@@ -195,11 +176,6 @@
             </Pane>
          </children>
       </HBox>
-      <TextField fx:id="tf_typecours" layoutX="390.0" layoutY="295.0" />
-      <Label layoutX="394.0" layoutY="277.0" text="○ Type">
-         <font>
-            <Font name="Times New Roman Bold" size="15.0" />
-         </font>
-      </Label>
+      <ComboBox fx:id="combo" layoutX="330.0" layoutY="231.0" prefWidth="150.0" promptText="Choisir un type" />
    </children>
 </AnchorPane>

@@ -18,8 +18,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.util.converter.IntegerStringConverter;
 import services.ServiceType;
 import javafx.scene.control.TableColumn.CellEditEvent;
 
@@ -54,29 +56,29 @@ public class AffichageTypeCoursController {
     public int getCalories() {
         return Integer.parseInt(col_calories.getText());
     }
-   /* @FXML
-    void search(ActionEvent event) {
-        String searchQuery = tf_recherche.getText().trim().toLowerCase();
+    /* @FXML
+     void search(ActionEvent event) {
+         String searchQuery = tf_recherche.getText().trim().toLowerCase();
 
-        // Vérifiez si le champ de recherche n'est pas vide
-        if (!searchQuery.isEmpty()) {
-            // Filtrer les cours selon le nom de recherche
-            ObservableList<TypeCours> filteredType = FXCollections.observableArrayList();
+         // Vérifiez si le champ de recherche n'est pas vide
+         if (!searchQuery.isEmpty()) {
+             // Filtrer les cours selon le nom de recherche
+             ObservableList<TypeCours> filteredType = FXCollections.observableArrayList();
 
-            for (TypeCours typeCours : tv_type.getItems()) {
-                if (typeCours.getNom().toLowerCase().contains(searchQuery)) {
-                    filteredType.add(typeCours);
-                }
-            }
+             for (TypeCours typeCours : tv_type.getItems()) {
+                 if (typeCours.getNom().toLowerCase().contains(searchQuery)) {
+                     filteredType.add(typeCours);
+                 }
+             }
 
-            // Mettre à jour les données affichées dans le TableView avec les résultats de la recherche
-            tv_type.setItems(filteredType);
-        } else {
-            // Si le champ de recherche est vide, réafficher tous les cours
-            tv_type.setItems(data);
-        }
-    } */
-    @FXML
+             // Mettre à jour les données affichées dans le TableView avec les résultats de la recherche
+             tv_type.setItems(filteredType);
+         } else {
+             // Si le champ de recherche est vide, réafficher tous les cours
+             tv_type.setItems(data);
+         }
+     } */
+ /*   @FXML
     void initialize() {
 
         try {
@@ -95,16 +97,77 @@ public class AffichageTypeCoursController {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-    }
+    } */
+    @FXML
+    void initialize() {
+        try {
+            ObservableList<TypeCours> types = FXCollections.observableList(serviceType.afficher());
+            tv_type.setItems(types);
+            col_nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+            col_objective.setCellValueFactory(new PropertyValueFactory<>("objective"));
+            col_description.setCellValueFactory(new PropertyValueFactory<>("description"));
+            col_calories.setCellValueFactory(new PropertyValueFactory<>("calories"));
 
-    public void SelectType(javafx.event.ActionEvent actionEvent) {
+            // Activation de la sélection au simple clic
+            tv_type.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+            // Activation de l'édition des cellules
+            col_nom.setCellFactory(TextFieldTableCell.forTableColumn());
+            col_objective.setCellFactory(TextFieldTableCell.forTableColumn());
+            col_calories.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+             col_description.setCellFactory(TextFieldTableCell.forTableColumn());
+
+            // Gestion de l'événement de modification de la cellule pour chaque colonne
+            col_nom.setOnEditCommit(event -> {
+                TypeCours typeCours = event.getRowValue();
+                typeCours.setNom(event.getNewValue());
+                ModifierType(typeCours);
+            });
+
+            col_objective.setOnEditCommit(event -> {
+                TypeCours typeCours = event.getRowValue();
+                typeCours.setObjective(event.getNewValue());
+                ModifierType(typeCours);
+            });
+
+            col_calories.setOnEditCommit(event -> {
+                TypeCours typeCours = event.getRowValue();
+                typeCours.setCalories(event.getNewValue());
+                ModifierType(typeCours);
+            });
+
+            col_description.setOnEditCommit(event -> {
+                TypeCours typeCours = event.getRowValue();
+                typeCours.setDescription(event.getNewValue());
+                ModifierType(typeCours);
+            });
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+   /* public void ModifierType(TypeCours typeCours) {
+        try {
+            serviceType.modifier(typeCours.getNom(), typeCours.getObjective(),typeCours.getDescription(),typeCours.getCalories() , typeCours.getId());
+            // Afficher une alerte pour confirmer la modification
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Modification réussie");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("Le cours a été modifié avec succès.");
+            successAlert.showAndWait();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    } */
+
+/*    public void SelectType(javafx.event.ActionEvent actionEvent) {
         TypeCours t = tv_type.getSelectionModel().getSelectedItem();
         col_nom.setText(t.getNom());
         col_calories.setText(String.valueOf(t.getCalories()));
         col_description.setText(t.getDescription());
         col_objective.setText(t.getObjective());
         System.out.println(t);
-    }
+    } */
    /* @FXML
     private void changecaloriesCellEvent(TableColumn.CellEditEvent<TypeCours, Integer> event) {
 
@@ -136,42 +199,37 @@ public class AffichageTypeCoursController {
     } */
 
 
-    public void SupprimerType(javafx.event.ActionEvent actionEvent) throws SQLException {
-        if (tv_type.getSelectionModel().getSelectedItem() != null) {
-            Alert deleteBookAlert = new Alert(Alert.AlertType.CONFIRMATION);
-            deleteBookAlert.setTitle("Delete a type");
-            deleteBookAlert.setHeaderText(null);
-            deleteBookAlert.setContentText("Are you sure that you want to delete this type?");
-            Optional<ButtonType> optionDeleteBookAlert = deleteBookAlert.showAndWait();
-            if (optionDeleteBookAlert.get() == ButtonType.OK) {
+   /* public void SupprimerCours(javafx.event.ActionEvent actionEvent) throws SQLException {
+       TypeCours selectedType = tv_type.getSelectionModel().getSelectedItem();
+        if (selectedType != null) {
+            try {
+                // Supprimer le cours sélectionné
+                serviceType.supprimer(selectedType.getId());
 
-                TypeCours t = tv_type.getSelectionModel().getSelectedItem();
-                serviceType.supprimer(t.getId());
+                // Mettre à jour la TableView
                 data.clear();
                 data.addAll(serviceType.afficher());
+                tv_type.refresh();
 
-                //Alert Delete Blog :
-                Alert succDeleteBookAlert = new Alert(Alert.AlertType.INFORMATION);
-                succDeleteBookAlert.setTitle("Delete Blog");
-                succDeleteBookAlert.setHeaderText("Results:");
-                succDeleteBookAlert.setContentText("cours deleted successfully!");
-
-                succDeleteBookAlert.showAndWait();
-            } else if (optionDeleteBookAlert.get() == ButtonType.CANCEL) {
-
+                // Afficher une alerte pour confirmer la suppression
+                Alert deleteAlert = new Alert(Alert.AlertType.INFORMATION);
+                deleteAlert.setTitle("Delete");
+                deleteAlert.setHeaderText(null);
+                deleteAlert.setContentText("Cours deleted successfully!");
+                deleteAlert.showAndWait();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
             }
-
         } else {
+            // Aucune vérification de sélection nécessaire ici
+            Alert selectAlert = new Alert(Alert.AlertType.WARNING);
+            selectAlert.setTitle("Select a cours");
+            selectAlert.setHeaderText(null);
+            selectAlert.setContentText("You need to select a cours first!");
+            selectAlert.showAndWait();
+        }
+    } */
 
-            //Alert Select BOOK :
-            Alert selectBookAlert = new Alert(Alert.AlertType.WARNING);
-            selectBookAlert.setTitle("Select a cours");
-            selectBookAlert.setHeaderText(null);
-            selectBookAlert.setContentText("You need to select a cours first!");
-            selectBookAlert.showAndWait();
-            //Alert Select Book !
-    }
-}
 
  /*   public void changecaloriesCellEvent(CellEditEvent edittedCell) {
         TypeCours typeSelected = tv_type.getSelectionModel().getSelectedItem();
@@ -179,7 +237,7 @@ public class AffichageTypeCoursController {
 
     }*/
 
-    public void ModifierType(javafx.event.ActionEvent actionEvent) throws SQLException {
+   /* public void ModifierType(javafx.event.ActionEvent actionEvent) throws SQLException {
         if (tv_type.getSelectionModel().getSelectedItem() != null) {
             TypeCours t = tv_type.getSelectionModel().getSelectedItem();
             String newCaloriesText = tf_newcalories.getText();
@@ -211,7 +269,7 @@ public class AffichageTypeCoursController {
             selectBookAlert.showAndWait();
             //Alert Select type !
         }
-    }
+    } */
    /*public void ModifierType(javafx.event.ActionEvent actionEvent) throws SQLException {
         if (tv_type.getSelectionModel().getSelectedItem() != null) {
 
@@ -301,6 +359,64 @@ public class AffichageTypeCoursController {
         }
     }
 
+    public void SelectType(ActionEvent actionEvent) {
+    }
+
+    public void ModifierType(TypeCours typeCours) {
+        try {
+            serviceType.modifier(typeCours.getNom(), typeCours.getObjective(), typeCours.getDescription(), typeCours.getCalories(), typeCours.getId());
+            // Afficher une alerte pour confirmer la modification
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Modification réussie");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("Le cours a été modifié avec succès.");
+            successAlert.showAndWait();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void SupprimerType(ActionEvent actionEvent) {
+        TypeCours selectedType = tv_type.getSelectionModel().getSelectedItem();
+        if (selectedType != null) {
+            try {
+                // Supprimer le cours sélectionné
+                serviceType.supprimer(selectedType.getId());
+
+                // Mettre à jour la TableView
+                data.clear();
+                data.addAll(serviceType.afficher());
+                tv_type.refresh();
+
+                // Afficher une alerte pour confirmer la suppression
+                Alert deleteAlert = new Alert(Alert.AlertType.INFORMATION);
+                deleteAlert.setTitle("Delete");
+                deleteAlert.setHeaderText(null);
+                deleteAlert.setContentText("Cours deleted successfully!");
+                deleteAlert.showAndWait();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+            // Aucune vérification de sélection nécessaire ici
+            Alert selectAlert = new Alert(Alert.AlertType.WARNING);
+            selectAlert.setTitle("Select a cours");
+            selectAlert.setHeaderText(null);
+            selectAlert.setContentText("You need to select a cours first!");
+            selectAlert.showAndWait();
+        }
+    }
+
+    public void refreshCours(MouseEvent mouseEvent) {
+        try {
+            ObservableList<TypeCours> types = FXCollections.observableList(serviceType.afficher());
+            tv_type.setItems(types);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    }
+
    /* public void RechercherType(MouseEvent mouseEvent) {
         String recherche = tf_recherche.getText().trim();
         if (!recherche.isEmpty()) {
@@ -328,6 +444,6 @@ public class AffichageTypeCoursController {
         alert.setContentText(contenu);
         alert.showAndWait();
     } */
-    }
+
 
 

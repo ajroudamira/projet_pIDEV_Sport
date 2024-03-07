@@ -65,11 +65,12 @@ public class TypeCours {
       this.calories = calories;
    }
 
+
    @Override
    public String toString() {
       return "TypeCours{" +
-              "id=" + id +
-              ", nom='" + nom + '\'' +
+             // "id=" + id +
+              " nom='" + nom + '\'' +
              ", objective='" + objective + '\'' +
               ", description='" + description + '\'' +
               ", calories=" + calories +

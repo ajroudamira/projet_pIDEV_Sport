@@ -1,26 +1,27 @@
 package controllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
-
 import entities.Cours;
 import entities.TypeCours;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import services.ServiceCours;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 
 public class CoursController {
 
-  //  public TextField tf_typecours;
+    public Label tf_back;
     ServiceCours serviceCours = new ServiceCours();
 
     @FXML
@@ -34,15 +35,33 @@ public class CoursController {
 
     @FXML
     private TextField tf_salle;
+
     @FXML
-    private TextField tf_typecours;
+    private ComboBox<TypeCours> combo;
+
+    @FXML
+    void initialize() {
+        chargerTypesCours();
+    }
+
+    private void chargerTypesCours() {
+        try {
+            List<TypeCours> types = serviceCours.getAllTypesCours();
+            ObservableList<TypeCours> observableTypesCours = FXCollections.observableArrayList(types);
+            combo.setItems(observableTypesCours);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("Erreur", "Impossible de charger les types de cours.");
+        }
+    }
+
     @FXML
     void AfficherCours(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/AffichageCours.fxml"));
             tf_duree.getScene().setRoot(root);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            showAlert("Erreur", "Impossible de charger l'affichage des cours.");
         }
     }
 
@@ -50,7 +69,7 @@ public class CoursController {
     void AjouterCours(ActionEvent event) {
         try {
             if (!isNumeric(tf_duree.getText())) {
-                showAlert("Erreur", "La duree doit contenir uniquement des chiffres !");
+                showAlert("Erreur", "La durée doit contenir uniquement des chiffres !");
                 return;
             }
 
@@ -59,40 +78,28 @@ public class CoursController {
                 return;
             }
 
-            if (serviceCours.isNomExist(tf_nom.getText())) {
-                showAlert("Erreur", "Un cours avec ce nom existe deja !");
+            TypeCours selectedTypeCours = combo.getSelectionModel().getSelectedItem();
+            if (selectedTypeCours == null) {
+                showAlert("Erreur", "Veuillez sélectionner un type de cours !");
                 return;
             }
 
-            // Chercher  TypeCours par son nom
-            TypeCours types = serviceCours.getTypeCoursByNom(tf_typecours.getText());
+            Cours nouveauCours = new Cours(
+                    Integer.parseInt(tf_duree.getText()),
+                    tf_nom.getText(),
+                    tf_salle.getText(),
+                    tf_horaire.getText(),
+                    selectedTypeCours
+            );
 
-            if (types != null) {
-                // Creer un nouvel objet Cours en utilisant l'objet TypeCours obtenu
-                Cours nouveauCours = new Cours(
-                        Integer.parseInt(tf_duree.getText()),
-                        tf_nom.getText(),
-                        tf_salle.getText(),
-                        tf_horaire.getText(),
-                        types
-                );
+            serviceCours.ajouter(nouveauCours);
 
-                // najouti cours jdid b service
-                serviceCours.ajouter(nouveauCours);
-
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
-                alert.setContentText("Cours ajoute avec succes !");
-                alert.showAndWait();
-            } else {
-                System.out.println("Le type de cours specifie est introuvable.");
-            }
+            showAlert("Succès", "Cours ajouté avec succès !");
         } catch (SQLException e) {
-            e.printStackTrace();
+            showAlert("Erreur", "Erreur lors de l'ajout du cours : " + e.getMessage());
         }
     }
 
-    // Méthode pour afficher une alerte
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -101,13 +108,20 @@ public class CoursController {
         alert.showAndWait();
     }
 
-    // Méthode pour vérifier si une chaîne contient uniquement des chiffres
     private boolean isNumeric(String str) {
         return str.matches("\\d+");
     }
 
-    // Méthode pour vérifier si une chaîne contient uniquement des lettres
     private boolean isAlpha(String str) {
         return str.matches("[a-zA-Z]+");
+    }
+
+    public void AffichBg(MouseEvent mouseEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/bg.fxml"));
+            tf_back.getScene().setRoot(root);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

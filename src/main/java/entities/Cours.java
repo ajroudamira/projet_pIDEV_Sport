@@ -102,8 +102,8 @@ public class Cours {
     @Override
     public String toString() {
         return "Cours{" +
-                "id=" + id +
-                ", duree=" + duree +
+               // "id=" + id +
+                " duree=" + duree +
                 ", nom='" + nom + '\'' +
                 ", salle='" + salle + '\'' +
                 ", horaire='" + horaire + '\'' +

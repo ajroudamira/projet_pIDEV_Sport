@@ -1,29 +1,34 @@
 package entities;
 
 public class Goals {
-    private String nom, salle;
+    private String nom, salle,horaire;
     private String objective;
-    private int calories;
+    private int calories,duree;
     private int idC, idT;
 
     public Goals() {
     }
 
-    public Goals(String nom, String salle, String objective, int calories, int idC, int idT) {
+    public Goals(String nom, String salle, String horaire, String objective, int calories, int duree, int idC, int idT) {
         this.nom = nom;
         this.salle = salle;
+        this.horaire = horaire;
         this.objective = objective;
         this.calories = calories;
+        this.duree = duree;
         this.idC = idC;
         this.idT = idT;
     }
-
-    public Goals(String nom, String salle, String objective, int calories) {
+    public Goals(String nom, String salle, String horaire, String objective, int calories, int duree) {
         this.nom = nom;
         this.salle = salle;
+        this.horaire = horaire;
         this.objective = objective;
         this.calories = calories;
+        this.duree = duree;
+
     }
+
 
     public String getNom() {
         return this.nom;
@@ -73,15 +78,33 @@ public class Goals {
         this.idT = idT;
     }
 
+    public String getHoraire() {
+        return horaire;
+    }
+
+    public void setHoraire(String horaire) {
+        this.horaire = horaire;
+    }
+
+    public int getDuree() {
+        return duree;
+    }
+
+    public void setDuree(int duree) {
+        this.duree = duree;
+    }
+
     @Override
     public String toString() {
         return "Goals{" +
                 "nom='" + nom + '\'' +
                 ", salle='" + salle + '\'' +
+                ", horaire='" + horaire + '\'' +
                 ", objective='" + objective + '\'' +
                 ", calories=" + calories +
-                ", idC=" + idC +
-                ", idT=" + idT +
+                ", duree=" + duree +
+              //  ", idC=" + idC +
+               // ", idT=" + idT +
                 '}';
     }
 }
