@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="791.0" prefWidth="1561.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.dashboard">
+    <top>
+        <AnchorPane prefHeight="86.0" prefWidth="998.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
+            <children>
+                <HBox layoutX="14.0" layoutY="6.0" prefHeight="90.0" prefWidth="1554.0">
+                    <children>
+                        <ImageView fitHeight="85.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@Design/png.png" />
+                            </image>
+                        </ImageView>
+                        <Label prefHeight="70.0" prefWidth="263.0" text="gymsync">
+                            <font>
+                                <Font size="37.0" />
+                            </font>
+                            <padding>
+                                <Insets left="21.0" top="16.0" />
+                            </padding>
+                            <textFill>
+                                <LinearGradient endX="1.0" endY="1.0">
+                                    <stops>
+                                        <Stop>
+                                            <color>
+                                                <Color green="0.6315789222717285" blue="0.27368420362472534" />
+                                            </color>
+                                        </Stop>
+                                        <Stop offset="1.0">
+                                            <color>
+                                                <Color red="1.0" green="1.0" blue="1.0" />
+                                            </color>
+                                        </Stop>
+                                    </stops>
+                                </LinearGradient>
+                            </textFill>
+                        </Label>
+                      <Button fx:id="profileButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="Profile" textFill="WHITE">
+                          <font>
+                              <Font size="18.0" />
+                          </font>
+                          <cursor>
+                              <Cursor fx:constant="HAND" />
+                          </cursor>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USER" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="900.0" top="22.0" />
+                     </HBox.margin>
+                      </Button>
+                  <Button fx:id="deconnecterButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="763.0" layoutY="32.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="189.0" style="-fx-background-color: transparent;" text="Déconnecter" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="ARROW_CIRCLE_LEFT" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets top="22.0" />
+                     </HBox.margin>
+                  </Button>
+                    </children>
+                </HBox>
+            </children>
+        </AnchorPane>
+    </top>
+    <left>
+        <AnchorPane prefHeight="611.0" prefWidth="217.0" style="-fx-background-color: #000000;" BorderPane.alignment="CENTER">
+            <children>
+                <VBox layoutX="-1.0" layoutY="34.0" prefHeight="484.0" prefWidth="222.0">
+                    <children>
+                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="228.0" style="-fx-background-color: transparent;" text="Utilisateurs" textFill="WHITE">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                            <padding>
+                                <Insets left="30.0" />
+                            </padding>
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USERS" selectionFill="BLACK" />
+                     </graphic>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </left>
+    <center>
+        <AnchorPane prefHeight="694.0" prefWidth="1322.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox layoutX="5.0" layoutY="39.0" prefHeight="37.0" prefWidth="778.0">
+               <children>
+                  <TextField fx:id="rechercheDashboard" prefHeight="32.0" prefWidth="221.0" promptText="Rechercher un Utilisateur">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="11.0" />
+                     </HBox.margin>
+                  </TextField>
+                <Button fx:id="rechercheButton" mnemonicParsing="false" prefHeight="13.0">
+                     <graphic>
+                        <FontAwesomeIconView fontSmoothingType="LCD" glyphName="SEARCH" selectionEnd="30" selectionStart="10" size="23" />
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="9.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="supprimerButton" mnemonicParsing="false" onAction="#SupprimerButtonButtonOnClick">
+                     <HBox.margin>
+                        <Insets left="344.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="TRASH" size="23" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="modifierButton" mnemonicParsing="false" onAction="#ModifierButtonButtonOnClick">
+                     <HBox.margin>
+                        <Insets left="34.0" />
+                     </HBox.margin>
+                     <graphic>
+                        <FontAwesomeIconView glyphName="EDIT" size="23" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <GridPane layoutX="830.0" layoutY="95.0" prefHeight="457.0" prefWidth="463.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label prefHeight="22.0" prefWidth="67.0" text="Pseudo" />
+                  <TextField fx:id="pseudoDashboard" promptText="Pseudo" GridPane.columnIndex="1" />
+                  <Label fx:id="pseudoDashboardError" prefHeight="26.0" prefWidth="381.0" GridPane.columnIndex="2" />
+                  <Label prefHeight="22.0" prefWidth="67.0" text="CIN" GridPane.rowIndex="1" />
+                  <TextField fx:id="cinDashboard" promptText="Cin" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="cinDashboardError" prefHeight="26.0" prefWidth="384.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label prefHeight="22.0" prefWidth="67.0" text="Nom" GridPane.rowIndex="2" />
+                  <TextField fx:id="nomDashboard" promptText="Nom" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="nomDashboardError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Label prefHeight="22.0" prefWidth="67.0" text="Prénom" GridPane.rowIndex="3" />
+                  <TextField fx:id="prenomDashboard" promptText="Prénom" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="prenomDashboardError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Label prefHeight="22.0" prefWidth="77.0" text="Age" GridPane.rowIndex="4" />
+                  <TextField fx:id="ageDashboard" promptText="Age" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="ageDashboardError" prefHeight="26.0" prefWidth="387.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <Label prefHeight="22.0" prefWidth="87.0" text="N°Téléphone" GridPane.rowIndex="5" />
+                  <TextField fx:id="numtelDashboard" promptText="N°Téléphone" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="numtelDashboardError" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <Label prefHeight="22.0" prefWidth="67.0" text="E-mail" GridPane.rowIndex="6" />
+                  <TextField fx:id="emailDashboard" promptText="E-mail" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label fx:id="emailDashboardError" prefHeight="26.0" prefWidth="386.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                  <RadioButton fx:id="roleClientDashboard" mnemonicParsing="false" text="Client" GridPane.rowIndex="7">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="role" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <Label fx:id="roleDashboardError" prefHeight="26.0" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+               </children>
+            </GridPane>
+            <TableView fx:id="TableView" layoutX="1.0" layoutY="161.0" onMouseClicked="#getSelected" prefHeight="462.0" prefWidth="782.0">
+               <columns>
+                  <TableColumn fx:id="pseudoC" prefWidth="119.20004272460938" text="PSEUDO" />
+                  <TableColumn fx:id="cinC" minWidth="5.60003662109375" prefWidth="126.39996337890625" text="CIN" />
+                  <TableColumn fx:id="nomC" prefWidth="84.00003051757812" text="NOM" />
+                  <TableColumn fx:id="prenomC" prefWidth="112.00006103515625" text="PRENOM" />
+                  <TableColumn fx:id="ageC" prefWidth="72.800048828125" text="AGE" />
+                  <TableColumn fx:id="numTelC" prefWidth="108.800048828125" text="N°TEL" />
+                  <TableColumn fx:id="emailC" prefWidth="155.99993896484375" text="EMAIL" />
+               </columns>
+            </TableView>
+            <HBox layoutX="225.0" layoutY="110.0" prefHeight="18.0" prefWidth="319.0">
+               <children>
+                  <RadioButton fx:id="admins" mnemonicParsing="false" selected="true" text="Admins">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="roles" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="clients" mnemonicParsing="false" text="Clients" toggleGroup="$roles">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+
+
+               </children>
+            </HBox>
+         </children>
+        </AnchorPane>
+    </center>
+</BorderPane>
