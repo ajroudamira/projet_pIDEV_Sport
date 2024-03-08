@@ -16,8 +16,11 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+import static utils.SendMail.SendMail;
+
 public class signupController implements Initializable {
     ServiceUtilisateurs serviceUtilisateurs = new ServiceUtilisateurs();
+    private Object Rand;
 
     /**
      * Called to initialize a controller after its root element has been
@@ -130,9 +133,12 @@ public class signupController implements Initializable {
             Utilisateur newUser = new Utilisateur(pseudoSignup.getText(), Integer.parseInt(cinSignup.getText()), nomSignup.getText(),
                     prenomSignup.getText(), Integer.parseInt(ageSignup.getText()), Integer.parseInt(numtelSignup.getText()), emailSignup.getText(),
                     mdpSignup.getText(), (roleClientSignup.isSelected() ? "Client" : ("Admin")));
-            try {
+
+
+                try {
                 serviceUtilisateurs.ajouter(newUser);
                 System.out.println("Utilisateur ajouté avec succès !");
+                    SendMail(event, (Integer) Rand,newUser) ;
                 serviceUtilisateurs.changeScreen(event, "/login.fxml", "Sign Up avec succées, Connectez vous!");
             } catch (SQLException e) {
                 System.out.println("Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
