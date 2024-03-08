@@ -27,6 +27,7 @@ public class AffichageCoursController {
     public TextField tf_recherche;
     public Label tf_type;
     public Label tf_back;
+    public ImageView us;
 
     ServiceCours serviceCours = new ServiceCours();
 
@@ -310,6 +311,15 @@ public class AffichageCoursController {
     public void AfficherMail(MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/mail.fxml"));
+            tf_back.getScene().setRoot(root);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void goclient(MouseEvent mouseEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/AffichageJointure.fxml"));
             tf_back.getScene().setRoot(root);
         } catch (IOException e) {
             System.out.println(e.getMessage());

@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -17,6 +18,7 @@ public class bgController {
 
     public Button tf_type;
     public Button tf_cours;
+    public ImageView us;
 
     @FXML
     void AfficheraffCours(MouseEvent event) {
@@ -39,7 +41,16 @@ public class bgController {
             System.out.println(e.getMessage());
         }
     }
+
+    public void goclient(MouseEvent mouseEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/AffichageJointure.fxml"));
+            tf_type.getScene().setRoot(root);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
+}
 
 
 

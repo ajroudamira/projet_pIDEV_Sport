@@ -352,11 +352,40 @@ public class AffichageJointureController {
             }
         }
     }
+  /*  public Image genererQRCode(String url) { //ca
+        try {
+            // Définir les paramètres pour la génération du code QR
+            Hashtable<EncodeHintType, Object> hints = new Hashtable<>();
+            hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
 
+            // Générer le code QR avec l'URL du PDF
+            QRCodeWriter qrCodeWriter = new QRCodeWriter();
+            BitMatrix bitMatrix = qrCodeWriter.encode(url, BarcodeFormat.QR_CODE, 200, 200, hints);
+
+            // Créer une BufferedImage pour le code QR
+            int width = bitMatrix.getWidth();
+            int height = bitMatrix.getHeight();
+            BufferedImage qrImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+            // Remplir la BufferedImage avec les données du BitMatrix
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    qrImage.setRGB(x, y, bitMatrix.get(x, y) ? Color.BLACK.getRGB() : Color.WHITE.getRGB());
+                }
+            }
+
+            // Convertir BufferedImage en Image JavaFX
+            Image image = SwingFXUtils.toFXImage(qrImage, null);
+            return image;
+        } catch (WriterException e) {
+            e.printStackTrace();
+            return null;
+        }
+    } */
    public Image genererQRCode(String recherche) {
        try {
            // Créer l'URL de recherche Google
-           String urlGoogle = "https://www.google.com/search?q=" + URLEncoder.encode(recherche, "UTF-8");
+           String urlGoogle = "https://www.bupa.com.au/healthlink/health-tools/calories-burned-calculator" + URLEncoder.encode(recherche, "UTF-8");
 
            // Définir les paramètres pour la génération du code QR
            Hashtable<EncodeHintType, Object> hints = new Hashtable<>();
@@ -386,6 +415,7 @@ public class AffichageJointureController {
            return null;
        }
    }
+
 
     public void GoHome(MouseEvent mouseEvent) {
         try {

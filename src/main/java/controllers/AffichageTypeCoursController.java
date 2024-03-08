@@ -32,6 +32,7 @@ public class AffichageTypeCoursController {
     public ImageView rech;
     public Label tf_cours;
     public Label tf_back;
+    public ImageView us;
     ServiceType serviceType= new ServiceType();
 
 
@@ -415,7 +416,16 @@ public class AffichageTypeCoursController {
             System.out.println(e.getMessage());
         }
     }
+
+    public void goclient(MouseEvent mouseEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/AffichageJointure.fxml"));
+            tf_back.getScene().setRoot(root);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
+}
 
    /* public void RechercherType(MouseEvent mouseEvent) {
         String recherche = tf_recherche.getText().trim();

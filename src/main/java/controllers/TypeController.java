@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import services.ServiceType;
 
@@ -17,6 +18,7 @@ import java.sql.SQLException;
 public class TypeController {
 
     public Label tf_back;
+    public ImageView us;
     ServiceType serviceType = new ServiceType();
 
     @FXML
@@ -99,6 +101,15 @@ public class TypeController {
     public void AffichBg(MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/bg.fxml"));
+            tf_back.getScene().setRoot(root);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void goclient(MouseEvent mouseEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/AffichageJointure.fxml"));
             tf_back.getScene().setRoot(root);
         } catch (IOException e) {
             System.out.println(e.getMessage());

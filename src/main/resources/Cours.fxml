@@ -102,7 +102,7 @@
                         <Image url="@images/dumbbell-16.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="24.0" fitWidth="23.0" layoutX="46.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="us" fitHeight="24.0" fitWidth="23.0" layoutX="46.0" layoutY="3.0" onMouseClicked="#goclient" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/user-6-16.png" />
                      </image>

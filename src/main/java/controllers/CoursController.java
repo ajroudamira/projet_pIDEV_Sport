@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import services.ServiceCours;
 
@@ -22,6 +23,7 @@ import java.util.List;
 public class CoursController {
 
     public Label tf_back;
+    public ImageView us;
     ServiceCours serviceCours = new ServiceCours();
 
     @FXML
@@ -119,6 +121,15 @@ public class CoursController {
     public void AffichBg(MouseEvent mouseEvent) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/bg.fxml"));
+            tf_back.getScene().setRoot(root);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void goclient(MouseEvent mouseEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/AffichageJointure.fxml"));
             tf_back.getScene().setRoot(root);
         } catch (IOException e) {
             System.out.println(e.getMessage());

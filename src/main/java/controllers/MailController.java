@@ -1,12 +1,17 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import javax.mail.*;
@@ -16,7 +21,7 @@ import javax.mail.internet.MimeMessage;
 public class MailController {
 
 
-
+    public ImageView back;
     @FXML
     private Button btnenvoyer;
 
@@ -85,4 +90,12 @@ public class MailController {
 
     }
 
+    public void backk(MouseEvent mouseEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/AffichageCours.fxml"));
+            back.getScene().setRoot(root);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
