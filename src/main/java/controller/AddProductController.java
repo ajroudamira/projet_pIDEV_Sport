@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
+import services.Mailing;
 import services.ServiceCategorie;
 import services.ServiceProduit;
 
@@ -101,6 +102,25 @@ public class AddProductController implements Initializable {
         p.setImagePath(ImagePath);
 
         sp.create(p);
+        Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+        try {
+            Mailing.sendHtmlNotification("aziz.chouikha@esprit.tn", "Nouveau Produit !", nom);
+        }
+        catch(Exception e)
+        {
+            a.setAlertType(Alert.AlertType.ERROR);
+            a.setTitle("NOT OK");
+            a.setContentText("Mail NON enovyé !");
+            a.showAndWait();
+            System.out.println(e.getMessage());
+
+        }
+        a.setAlertType(Alert.AlertType.CONFIRMATION);
+        a.setTitle("OK");
+        a.setContentText("Mail enovyé !");
+        a.showAndWait();
+
+
     }
 
 
