@@ -1,4 +1,6 @@
 package controllers;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import entities.Utilisateur;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -58,13 +60,7 @@ public class loginController implements Initializable {
                     case "Client":
                         serviceUtilisateurs.changeScreen(event, "/clientFront.fxml", "Client");
                         break;
-                    case "Locateur":
-                        serviceUtilisateurs.changeScreen(event, "/coach.fxml", "Coach");
-                        break;
-                    case "Livreur":
-                        serviceUtilisateurs.changeScreen(event, "/Admin.fxml", "admin");
-                        break;
-                    default:
+                       default:
                         break;
                 }
             }
@@ -115,6 +111,36 @@ public class loginController implements Initializable {
             eyeIconLogin.setStyle("-fx-background-image: url('../../resources/Design/eyeIcon.png')");
         }
     }
+    @FXML
+    void GoogleLogin(ActionEvent event) {
+        // Your updated JSON data
+        // Parse JSON
+        String jsonData = "{\"web\":{\"client_id\":\"34198700278-5o1n0105jn1u2m8odioepf3kavqh04dn.apps.googleusercontent.com\",\"project_id\":\"batahapp-415619\",\"auth_uri\":\"https://accounts.google.com/o/oauth2/auth\",\"token_uri\":\"https://oauth2.googleapis.com/token\",\"auth_provider_x509_cert_url\":\"https://www.googleapis.com/oauth2/v1/certs\",\"client_secret\":\"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\",\"redirect_uris\":[\"http://localhost/google/callback/\"]}}";
+
+        JsonObject jsonObject = new Gson().fromJson(jsonData, JsonObject.class);
+        JsonObject web = jsonObject.getAsJsonObject("web");
+        String gClientId = web.get("client_id").getAsString();
+        String gRedir = web.get("redirect_uris").getAsJsonArray().get(0).getAsString(); // Assuming there's only one redirect URI
+        String gScope = "https://www.googleapis.com/auth/userinfo.profile " +
+                "https://www.googleapis.com/auth/userinfo.email " +
+                "https://www.googleapis.com/auth/user.phonenumbers.read";
+        String gSecret = web.get("client_secret").getAsString();
+
+        OAuthAuthenticator auth = new OAuthGoogleAuthenticator(gClientId, gRedir, gSecret, gScope);
+        auth.startLogin(() -> {
+            serviceUtilisateurs.changeScreen(event, "/dashboard.fxml", "Admin");
 
 
-}
+        });
+    }
+//    @FXML
+//    void closeClicked(ActionEvent event) {
+//        Node source = (Node) event.getSource();
+//        Stage stage = (Stage) source.getScene().getWindow();
+//        stage.close();
+//
+//    }
+
+    }
+
+
