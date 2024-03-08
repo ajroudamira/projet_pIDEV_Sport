@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static utils.SendMail.SendMail;
+//import static utils.SendMail.SendMail;
 
 public class signupController implements Initializable {
     ServiceUtilisateurs serviceUtilisateurs = new ServiceUtilisateurs();
@@ -136,14 +136,17 @@ public class signupController implements Initializable {
 
 
                 try {
+                    System.out.println("email =" + newUser.getEmail());
+                    emailPartenaire.sendEmail(newUser.getEmail(),"Inscription Validée","bienvenu(e) chez nous " + newUser.getNom()+".");
                 serviceUtilisateurs.ajouter(newUser);
                 System.out.println("Utilisateur ajouté avec succès !");
-                    SendMail(event, (Integer) Rand,newUser) ;
+
+                    //SendMail(event, (Integer) Rand,newUser) ;
+
                 serviceUtilisateurs.changeScreen(event, "/login.fxml", "Sign Up avec succées, Connectez vous!");
             } catch (SQLException e) {
                 System.out.println("Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
             }
-
         }
     }
 }
