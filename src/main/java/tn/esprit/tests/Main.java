@@ -2,7 +2,6 @@ package tn.esprit.tests;
 
 import tn.esprit.entities.Equipement;
 import tn.esprit.services.ServiceEquipement;
-import tn.esprit.utils.MyDatabase;
 
 import java.util.Date;
 

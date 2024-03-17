@@ -1,7 +1,7 @@
 package tn.esprit.services;
 
 import tn.esprit.entities.Equipement;
-import tn.esprit.utils.MyDatabase;
+import tn.esprit.utils.MyDataBase;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class ServiceEquipement implements IService<Equipement>{
     private Connection cnx;
     public ServiceEquipement(){
-        cnx= MyDatabase.getInstance().getCnx();
+        cnx= MyDataBase.getInstance().getCnx();
     }
     @Override
     public void ajouter(Equipement equipement)  {

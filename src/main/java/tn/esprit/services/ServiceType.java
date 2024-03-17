@@ -1,7 +1,7 @@
 package tn.esprit.services;
 
 import tn.esprit.entities.Type;
-import tn.esprit.utils.MyDatabase;
+import tn.esprit.utils.MyDataBase;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,13 +9,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ServiceType implements IService<Type>{
     private Connection cnx;
 
     public ServiceType() {
-        cnx = MyDatabase.getInstance().getCnx();
+        cnx = MyDataBase.getInstance().getCnx();
     }
 
     @Override

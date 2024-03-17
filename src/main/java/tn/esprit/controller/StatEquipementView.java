@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.stage.Stage;
 import tn.esprit.FXMain;
-import tn.esprit.utils.MyDatabase;
+import tn.esprit.utils.MyDataBase;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -32,7 +32,7 @@ public class StatEquipementView
     }
     public void stat() throws SQLException {
         String query="SELECT count(e.id) as nbr,t.nom as nom FROM equipement e JOIN type t ON e.idType=t.id GROUP BY t.id;";
-        Statement st= MyDatabase.getInstance().getCnx().createStatement();
+        Statement st= MyDataBase.getInstance().getCnx().createStatement();
         ResultSet rs=st.executeQuery(query);
         while (rs.next()){
             data.add(new PieChart.Data("Nom type: "+rs.getString("nom"),rs.getInt("nbr")));

@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class MyDatabase {
+public class MyDataBase {
     private final String URL="jdbc:mysql://127.0.0.1:3306/gym";
     private final String USER="root";
     private final String PWD="";
     private Connection cnx;
-    private static MyDatabase instance;
-    private MyDatabase(){
+    private static MyDataBase instance;
+    private MyDataBase(){
         try {
             cnx= DriverManager.getConnection(URL,USER,PWD);
             System.out.println("Connexion etablie");
@@ -18,9 +18,9 @@ public class MyDatabase {
             System.out.println("erreur:"+e.getMessage());
         }
     }
-    public static MyDatabase getInstance(){
+    public static MyDataBase getInstance(){
         if(instance==null){
-            instance=new MyDatabase();
+            instance=new MyDataBase();
         }
         else{
             System.out.println("deja connecter");
